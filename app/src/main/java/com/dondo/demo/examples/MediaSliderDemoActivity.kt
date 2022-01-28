@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dondo.demo.databinding.ActivityMediaSliderDemoBinding
 import com.dondo.ui.utils.viewBinding
+import timber.log.Timber
 
 class MediaSliderDemoActivity : AppCompatActivity() {
 
@@ -24,5 +25,9 @@ class MediaSliderDemoActivity : AppCompatActivity() {
 		)
 
 		binding.cvSlider.setElements(list)
+		binding.cvSlider.currentItem = 2
+		binding.cvSlider.onPageSelected = { position ->
+			Timber.d("onPageSelected, position: $position")
+		}
 	}
 }
