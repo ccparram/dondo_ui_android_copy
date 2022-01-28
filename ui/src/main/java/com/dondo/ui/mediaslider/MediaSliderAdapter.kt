@@ -6,13 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dondo.ui.databinding.ElementImageBinding
 import com.dondo.ui.databinding.ElementVideoBinding
 
-class MediaSliderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
+.Adapter<RecyclerView.ViewHolder>() {
 
 	private val VIDEO_TYPE = 0
 	private val IMAGE_TYPE = 1
 	private val VIDEO_EXTENSION = ".mp4"
 
 	private val elements = ArrayList<String>()
+
+	var onImageTouchAction: () -> Unit = {}
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 		return when (viewType) {
@@ -28,7 +31,9 @@ class MediaSliderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 					LayoutInflater.from(parent.context),
 					parent,
 					false
-				)
+				),
+				isZoomEnable,
+				onImageTouchAction
 			)
 		}
 	}

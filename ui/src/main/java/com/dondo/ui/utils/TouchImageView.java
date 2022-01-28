@@ -2,12 +2,9 @@ package com.dondo.ui.utils;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.dondo.ui.R;
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -147,18 +144,6 @@ public class TouchImageView extends AppCompatImageView {
         onDrawReady = false;
 
         super.setOnTouchListener(new PrivateOnTouchListener());
-
-        final TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.TouchImageView, defStyleAttr, 0);
-        try {
-            if (attributes != null && !isInEditMode()) {
-                setZoomEnabled(attributes.getBoolean(R.styleable.TouchImageView_zoom_enabled, true));
-            }
-        } finally {
-            // release the TypedArray so that it can be reused.
-            if (attributes != null) {
-                attributes.recycle();
-            }
-        }
     }
 
     @Override
@@ -962,6 +947,9 @@ public class TouchImageView extends AppCompatImageView {
             if (doubleTapListener != null) {
                 return doubleTapListener.onSingleTapConfirmed(e);
             }
+            if (touchImageViewListener != null) {
+                touchImageViewListener.onMove();
+            }
             return performClick();
         }
 
@@ -992,13 +980,20 @@ public class TouchImageView extends AppCompatImageView {
                     consumed = doubleTapListener.onDoubleTap(e);
                 }
                 if (state == State.NONE) {
-                    float targetZoom = (normalizedScale == minScale) ? maxScale : minScale;
-                    DoubleTapZoom doubleTap = new DoubleTapZoom(targetZoom, e.getX(), e.getY(), false);
-                    compatPostOnAnimation(doubleTap);
+                    changeZoom(e);
                     consumed = true;
                 }
+            } else if (normalizedScale != minScale) {
+                changeZoom(e);
+                consumed = true;
             }
             return consumed;
+        }
+
+        private void changeZoom(MotionEvent e) {
+            float targetZoom = (normalizedScale == minScale) ? maxScale : minScale;
+            DoubleTapZoom doubleTap = new DoubleTapZoom(targetZoom, e.getX(), e.getY(), false);
+            compatPostOnAnimation(doubleTap);
         }
 
         @Override
@@ -1075,13 +1070,6 @@ public class TouchImageView extends AppCompatImageView {
             }
 
             //
-            // OnTouchImageViewListener is set: TouchImageView dragged by user.
-            //
-            if (touchImageViewListener != null) {
-                touchImageViewListener.onMove();
-            }
-
-            //
             // indicate event was handled
             //
             return true;
@@ -1103,13 +1091,6 @@ public class TouchImageView extends AppCompatImageView {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
             scaleImage(detector.getScaleFactor(), detector.getFocusX(), detector.getFocusY(), true);
-
-            //
-            // OnTouchImageViewListener is set: TouchImageView pinch zoomed by user.
-            //
-            if (touchImageViewListener != null) {
-                touchImageViewListener.onMove();
-            }
             return true;
         }
 
@@ -1206,14 +1187,6 @@ public class TouchImageView extends AppCompatImageView {
             translateImageToCenterTouchPosition(t);
             fixScaleTrans();
             setImageMatrix(matrix);
-
-            //
-            // OnTouchImageViewListener is set: double tap runnable updates listener
-            // with every frame.
-            //
-            if (touchImageViewListener != null) {
-                touchImageViewListener.onMove();
-            }
 
             if (t < 1f) {
                 //
@@ -1365,15 +1338,6 @@ public class TouchImageView extends AppCompatImageView {
 
         @Override
         public void run() {
-
-            //
-            // OnTouchImageViewListener is set: TouchImageView listener has been flung by user.
-            // Listener runnable updated with each frame of fling animation.
-            //
-            if (touchImageViewListener != null) {
-                touchImageViewListener.onMove();
-            }
-
             if (scroller.isFinished()) {
                 scroller = null;
                 return;

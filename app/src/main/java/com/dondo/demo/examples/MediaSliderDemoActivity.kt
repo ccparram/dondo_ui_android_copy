@@ -24,10 +24,15 @@ class MediaSliderDemoActivity : AppCompatActivity() {
 			"https://res.cloudinary.com/kartiksaraf/video/upload/v1564516308/github_MediaSliderView/demo_videos/video2_sn3sek.mp4"
 		)
 
-		binding.cvSlider.setElements(list)
-		binding.cvSlider.currentItem = 2
-		binding.cvSlider.onPageSelected = { position ->
-			Timber.d("onPageSelected, position: $position")
+		with(binding.cvSlider) {
+			setElements(list)
+			currentItem = 2
+			onPageSelected = { position ->
+				Timber.d("onPageSelected, position: $position")
+			}
+			onImageTouchAction = {
+				Timber.d("onImageTouchAction")
+			}
 		}
 	}
 }
