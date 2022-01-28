@@ -21,7 +21,7 @@ class MediaSliderView @JvmOverloads constructor(
 		initViewsAndSetAdapter()
 	}
 
-	fun setElements(elements: ArrayList<String>) {
+	fun setElements(elements: List<String>) {
 		(binding.vpSlider.adapter as? MediaSliderAdapter)?.setElements(elements)
 			?: throw IllegalStateException("Initialize the adapter first")
 	}

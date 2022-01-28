@@ -14,7 +14,7 @@ class MediaSliderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 	val UNKNOWN_TYPE = -1
 
 	val VIDEO_EXTENSION = ".mp4"
-	val IMAGE_EXTENSION = ".jpg"
+	val IMAGE_EXTENSION = ".jpeg"
 
 	val elements = ArrayList<String>()
 
@@ -65,7 +65,7 @@ class MediaSliderAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 		return elements.size
 	}
 
-	fun setElements(elements: ArrayList<String>) {
+	fun setElements(elements: List<String>) {
 		this.elements.clear()
 		this.elements.addAll(elements)
 		notifyItemRangeInserted(0, elements.size)
