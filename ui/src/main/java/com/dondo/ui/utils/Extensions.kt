@@ -1,4 +1,4 @@
-package com.dondo.ui
+package com.dondo.ui.utils
 
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity

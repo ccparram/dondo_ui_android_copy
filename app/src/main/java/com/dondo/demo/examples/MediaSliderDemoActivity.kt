@@ -3,7 +3,7 @@ package com.dondo.demo.examples
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dondo.demo.databinding.ActivityMediaSliderDemoBinding
-import com.dondo.ui.viewBinding
+import com.dondo.ui.utils.viewBinding
 
 class MediaSliderDemoActivity : AppCompatActivity() {
 
