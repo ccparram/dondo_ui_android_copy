@@ -10,26 +10,26 @@ import timber.log.Timber.DebugTree
 
 class DemoApplication : MultiDexApplication() {
 
-	override fun onCreate() {
-		super.onCreate()
+    override fun onCreate() {
+        super.onCreate()
 
-		initLogger()
-	}
+        initLogger()
+    }
 
-	private fun initLogger() {
-		val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
-			.showThreadInfo(false)
-			.tag("DEMO_LOGGER")
-			.methodCount(1)
-			.methodOffset(4)
-			.build()
+    private fun initLogger() {
+        val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
+            .showThreadInfo(false)
+            .tag("DEMO_LOGGER")
+            .methodCount(1)
+            .methodOffset(4)
+            .build()
 
-		Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
+        Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
 
-		Timber.plant(object : DebugTree() {
-			override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
-				Logger.log(priority, tag, message, t)
-			}
-		})
-	}
+        Timber.plant(object : DebugTree() {
+            override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+                Logger.log(priority, tag, message, t)
+            }
+        })
+    }
 }

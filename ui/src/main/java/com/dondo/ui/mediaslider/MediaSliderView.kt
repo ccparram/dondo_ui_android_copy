@@ -10,68 +10,68 @@ import com.dondo.ui.databinding.MediaSliderViewBinding
 import com.dondo.ui.utils.Constants.NO_SELECTION
 
 class MediaSliderView @JvmOverloads constructor(
-	context: Context,
-	attrs: AttributeSet? = null,
-	defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-	private val binding: MediaSliderViewBinding by lazy {
-		MediaSliderViewBinding.inflate(LayoutInflater.from(context), this, true)
-	}
+    private val binding: MediaSliderViewBinding by lazy {
+        MediaSliderViewBinding.inflate(LayoutInflater.from(context), this, true)
+    }
 
-	private lateinit var adapter: MediaSliderAdapter
+    private lateinit var adapter: MediaSliderAdapter
 
-	var currentItem = NO_SELECTION
-		set(value) {
-			field = value
-			binding.vpSlider.currentItem = field
-		}
-		get() {
-			return binding.vpSlider.currentItem
-		}
+    var currentItem = NO_SELECTION
+        set(value) {
+            field = value
+            binding.vpSlider.currentItem = field
+        }
+        get() {
+            return binding.vpSlider.currentItem
+        }
 
-	var onPageSelected: (position: Int) -> Unit = {}
-		set(value) {
-			field = value
-			binding.vpSlider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-				override fun onPageSelected(position: Int) {
-					super.onPageSelected(position)
-					field(position)
-				}
-			})
-		}
+    var onPageSelected: (position: Int) -> Unit = {}
+        set(value) {
+            field = value
+            binding.vpSlider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    field(position)
+                }
+            })
+        }
 
-	var onImageTouchAction: () -> Unit = {}
-		set(value) {
-			field = value
-			adapter.onImageTouchAction = value
-		}
+    var onImageTouchAction: () -> Unit = {}
+        set(value) {
+            field = value
+            adapter.onImageTouchAction = value
+        }
 
-	init {
-		rootView
-		setupAttrs(attrs)
-	}
+    init {
+        rootView
+        setupAttrs(attrs)
+    }
 
-	private fun setupAttrs(attrs: AttributeSet?) {
-		attrs.let {
-			context.theme.obtainStyledAttributes(it, R.styleable.MediaSliderView, 0, 0).apply {
-				val isZoomEnable = getBoolean(R.styleable.MediaSliderView_double_tap_zoom_enabled, false)
-				initViewsAndSetAdapter(isZoomEnable)
-				recycle()
-			}
-		}
-	}
+    private fun setupAttrs(attrs: AttributeSet?) {
+        attrs.let {
+            context.theme.obtainStyledAttributes(it, R.styleable.MediaSliderView, 0, 0).apply {
+                val isZoomEnable = getBoolean(R.styleable.MediaSliderView_double_tap_zoom_enabled, false)
+                initViewsAndSetAdapter(isZoomEnable)
+                recycle()
+            }
+        }
+    }
 
-	private fun initViewsAndSetAdapter(isZoomEnable: Boolean) {
-		with(binding) {
-			MediaSliderAdapter(isZoomEnable).apply {
-				adapter = this
-				vpSlider.adapter = this
-			}
-		}
-	}
+    private fun initViewsAndSetAdapter(isZoomEnable: Boolean) {
+        with(binding) {
+            MediaSliderAdapter(isZoomEnable).apply {
+                adapter = this
+                vpSlider.adapter = this
+            }
+        }
+    }
 
-	fun setElements(elements: List<String>) {
-		adapter.setElements(elements)
-	}
+    fun setElements(elements: List<String>) {
+        adapter.setElements(elements)
+    }
 }
