@@ -59,6 +59,6 @@ class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
     fun setElements(elements: List<String>) {
         this.elements.clear()
         this.elements.addAll(elements)
-        notifyItemRangeInserted(0, elements.size)
+        notifyDataSetChanged()
     }
 }
