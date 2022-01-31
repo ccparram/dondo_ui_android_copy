@@ -32,6 +32,13 @@ class MediaSliderDemoActivity : AppCompatActivity() {
             }
             onImageTouchAction = {
                 Timber.d("onImageTouchAction")
+                val newList = arrayListOf(
+                    "https://res.cloudinary.com/kartiksaraf/image/upload/v1564514549/github_MediaSliderView/demo_images/ea0ef44d800aa07722c25b1a6db58800--iphone-backgrounds-phone-wallpapers_cqmbbx.jpg",
+                    "https://res.cloudinary.com/kartiksaraf/video/upload/v1564516308/github_MediaSliderView/demo_videos/video1_jetay3.mp4",
+                    "https://res.cloudinary.com/kartiksaraf/image/upload/v1564514590/github_MediaSliderView/demo_images/Quotefancy-20588-3840x2160_msurjx.jpg",
+                    "https://res.cloudinary.com/kartiksaraf/video/upload/v1564516308/github_MediaSliderView/demo_videos/video2_sn3sek.mp4"
+                )
+                setElements(newList)
             }
         }
     }
