@@ -20,6 +20,7 @@
             android:background="@drawable/text_field_states"
             android:minHeight="@dimen/edittext_min_height"
             android:paddingHorizontal="16dp"
+            android:paddingTop="@dimen/padding_normal_50"
             android:textColor="@color/text_high_emphasis"
             android:textCursorDrawable="@drawable/color_cursor_green" />
     </com.google.android.material.textfield.TextInputLayout>

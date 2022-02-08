@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="margin_normal_50">8dp</dimen>
+
     <dimen name="padding_normal_0">0dp</dimen>
     <dimen name="padding_normal_12">2dp</dimen>
     <dimen name="padding_normal_25">4dp</dimen>

@@ -90,14 +90,13 @@ class EditTextField @JvmOverloads constructor(
             }
         }
 
-        editText = binding.etContent.apply {
-            minLines = minLines
-            maxLines = maxLines
-            inputType = inputType
+        editText = binding.etContent
+        editText.minLines = minLines
+        editText.maxLines = maxLines
+        editText.inputType = inputType
 
-            if (maxLength >= 0) {
-                filters = arrayOf(InputFilter.LengthFilter(maxLength))
-            }
+        if (maxLength >= 0) {
+            editText.filters = arrayOf(InputFilter.LengthFilter(maxLength))
         }
     }
 
@@ -160,9 +159,10 @@ class EditTextField @JvmOverloads constructor(
     private fun validateInputType(): Boolean {
         val inputTypeEmail = TYPE_CLASS_TEXT or TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 
-        return when (inputType) {
-            inputTypeEmail -> EMAIL_ADDRESS.matcher(editText.text.toString()).matches()
-            else -> true
+        return if (inputType == inputTypeEmail) {
+            EMAIL_ADDRESS.matcher(editText.text.toString()).matches()
+        } else {
+            true
         }
     }
 
