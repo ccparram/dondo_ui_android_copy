@@ -6,4 +6,26 @@
     <color name="transparent">#5a000000</color>
     <color name="transparentWhite">#33FFFFFF</color>
     <color name="transparent_clear">#00000000</color>
+    <color name="green">#77F16D</color>
+    <color name="red">#CA4047</color>
+
+    <!-- Elevation -->
+    <color name="elevation_background">#0B0B0B</color>
+    <color name="elevation_1">#1C1C1C</color>
+    <color name="elevation_2">#262626</color>
+    <color name="elevation_3">#2D2D2D</color>
+    <color name="elevation_4">#323232</color>
+    <color name="elevation_5">#545454</color>
+
+    <color name="main_primary">#77F16D</color>
+
+    <!--  Text -->
+    <color name="text_high_emphasis">#E7E7E7</color>
+    <color name="text_mid_emphasis">#9D9D9D</color>
+    <color name="text_disabled">#686868</color>
+    <color name="text_link">@color/main_primary</color>
+    <color name="text_error">#CA4047</color>
+    <color name="text_button_primary_enabled">@color/elevation_background</color>
+    <color name="text_button_secondary_enabled">@color/main_primary</color>
+    <color name="text_button_disabled">@color/text_disabled</color>
 </resources>

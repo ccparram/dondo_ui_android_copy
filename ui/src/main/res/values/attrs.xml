@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="is_required" format="boolean" />
+    <attr name="hint" format="string" />
+
     <declare-styleable name="MediaSliderView">
         <attr name="double_tap_zoom_enabled" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="EditTextField">
+        <attr name="android:inputType" />
+        <attr name="android:imeOptions" />
+        <attr name="is_required" />
+        <attr name="title" />
+        <attr name="hint" />
+        <attr name="minLength" format="integer" />
+        <attr name="maxLength" format="integer" />
+        <attr name="minLines" format="integer" />
+        <attr name="maxLines" format="integer" />
     </declare-styleable>
 </resources>

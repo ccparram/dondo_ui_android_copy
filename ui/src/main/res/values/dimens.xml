@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_normal_0">0dp</dimen>
+    <dimen name="padding_normal_12">2dp</dimen>
+    <dimen name="padding_normal_25">4dp</dimen>
+    <dimen name="padding_normal_31">5dp</dimen>
+    <dimen name="padding_normal_50">8dp</dimen>
+
+    <dimen name="corners_width">1dp</dimen>
+
+    <!-- EditText -->
+    <dimen name="edittext_min_height">60dp</dimen>
+
+    <!--  Radius  -->
+    <dimen name="radius_7">7dp</dimen>
+    <dimen name="radius_8">8dp</dimen>
+    <dimen name="radius_10">10dp</dimen>
+    <dimen name="radius_15">15dp</dimen>
+</resources>
