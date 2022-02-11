@@ -15,7 +15,7 @@ class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
 
     private val elements = ArrayList<String>()
 
-    var onImageTouchAction: () -> Unit = {}
+    var onMediaTouchAction: () -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -24,7 +24,8 @@ class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                )
+                ),
+                onMediaTouchAction
             )
             else -> ImageViewHolder(
                 ElementImageBinding.inflate(
@@ -33,7 +34,7 @@ class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
                     false
                 ),
                 isZoomEnable,
-                onImageTouchAction
+                onMediaTouchAction
             )
         }
     }

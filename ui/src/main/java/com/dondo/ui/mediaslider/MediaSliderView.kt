@@ -44,7 +44,7 @@ class MediaSliderView @JvmOverloads constructor(
     var onImageTouchAction: () -> Unit = {}
         set(value) {
             field = value
-            adapter.onImageTouchAction = value
+            adapter.onMediaTouchAction = value
         }
 
     init {
