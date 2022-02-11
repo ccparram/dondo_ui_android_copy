@@ -56,15 +56,16 @@ class MediaSliderView @JvmOverloads constructor(
         attrs.let {
             context.theme.obtainStyledAttributes(it, R.styleable.MediaSliderView, 0, 0).apply {
                 val isZoomEnable = getBoolean(R.styleable.MediaSliderView_double_tap_zoom_enabled, false)
-                initViewsAndSetAdapter(isZoomEnable)
+                val showVideoController = getBoolean(R.styleable.MediaSliderView_show_video_controller, false)
+                initViewsAndSetAdapter(isZoomEnable, showVideoController)
                 recycle()
             }
         }
     }
 
-    private fun initViewsAndSetAdapter(isZoomEnable: Boolean) {
+    private fun initViewsAndSetAdapter(isZoomEnable: Boolean, showVideoController: Boolean) {
         with(binding) {
-            MediaSliderAdapter(isZoomEnable).apply {
+            MediaSliderAdapter(isZoomEnable, showVideoController).apply {
                 adapter = this
                 vpSlider.adapter = this
             }

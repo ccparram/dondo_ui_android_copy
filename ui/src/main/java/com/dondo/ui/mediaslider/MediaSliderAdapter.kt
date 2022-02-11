@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dondo.ui.databinding.ElementImageBinding
 import com.dondo.ui.databinding.ElementVideoBinding
 
-class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
+class MediaSliderAdapter(private val isZoomEnable: Boolean, private val showVideoController: Boolean) : RecyclerView
 .Adapter<RecyclerView.ViewHolder>() {
 
     private val VIDEO_TYPE = 0
@@ -25,6 +25,7 @@ class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
                     parent,
                     false
                 ),
+                showVideoController,
                 onMediaTouchAction
             )
             else -> ImageViewHolder(
