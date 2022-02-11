@@ -2,6 +2,5 @@
 <resources>
     <declare-styleable name="MediaSliderView">
         <attr name="double_tap_zoom_enabled" format="boolean" />
-        <attr name="show_video_controller" format="boolean" />
     </declare-styleable>
 </resources>

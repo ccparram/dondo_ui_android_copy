@@ -1,30 +1,26 @@
 package com.dondo.ui.mediaslider
 
 import android.net.Uri
-import android.widget.MediaController
 import androidx.recyclerview.widget.RecyclerView
 import com.dondo.ui.databinding.ElementVideoBinding
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 
 class VideoViewHolder(
     private val binding: ElementVideoBinding,
-    private val showVideoController: Boolean,
-    private val onClickAction: () -> Unit
+    private val getPlayer: (Player) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(url: String) {
         binding.run {
-            videoView.apply {
-                if (showVideoController) {
-                    val mediaController = MediaController(this.context)
-                    mediaController.setAnchorView(this)
-                    this.setMediaController(mediaController)
-                }
-
-                setVideoURI(Uri.parse(url))
-                setOnPreparedListener { it.start() }
-                setOnCompletionListener { it.start() }
-                setOnClickListener { onClickAction.invoke() }
-            }
+            val player = ExoPlayer.Builder(binding.root.context).build()
+            val mediaItem = MediaItem.fromUri(Uri.parse(url))
+            playerView.player = player
+            getPlayer(player)
+            player.setMediaItem(mediaItem)
+            player.prepare()
+            player.playWhenReady
         }
     }
 }

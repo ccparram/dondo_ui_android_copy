@@ -33,10 +33,12 @@ class MediaSliderView @JvmOverloads constructor(
     var onPageSelected: (position: Int) -> Unit = {}
         set(value) {
             field = value
-            binding.vpSlider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            binding.vpSlider.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     field(position)
+                    adapter.stopPlayer()
                 }
             })
         }
@@ -44,7 +46,7 @@ class MediaSliderView @JvmOverloads constructor(
     var onImageTouchAction: () -> Unit = {}
         set(value) {
             field = value
-            adapter.onMediaTouchAction = value
+            adapter.onPictureTouchAction = value
         }
 
     init {
@@ -55,17 +57,17 @@ class MediaSliderView @JvmOverloads constructor(
     private fun setupAttrs(attrs: AttributeSet?) {
         attrs.let {
             context.theme.obtainStyledAttributes(it, R.styleable.MediaSliderView, 0, 0).apply {
-                val isZoomEnable = getBoolean(R.styleable.MediaSliderView_double_tap_zoom_enabled, false)
-                val showVideoController = getBoolean(R.styleable.MediaSliderView_show_video_controller, false)
-                initViewsAndSetAdapter(isZoomEnable, showVideoController)
+                val isZoomEnable =
+                    getBoolean(R.styleable.MediaSliderView_double_tap_zoom_enabled, false)
+                initViewsAndSetAdapter(isZoomEnable)
                 recycle()
             }
         }
     }
 
-    private fun initViewsAndSetAdapter(isZoomEnable: Boolean, showVideoController: Boolean) {
+    private fun initViewsAndSetAdapter(isZoomEnable: Boolean) {
         with(binding) {
-            MediaSliderAdapter(isZoomEnable, showVideoController).apply {
+            MediaSliderAdapter(isZoomEnable).apply {
                 adapter = this
                 vpSlider.adapter = this
             }

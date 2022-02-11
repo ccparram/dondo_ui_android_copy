@@ -9,6 +9,5 @@
         android:id="@+id/cvSlider"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:double_tap_zoom_enabled="true"
-        app:show_video_controller="true" />
+        app:double_tap_zoom_enabled="true" />
 </FrameLayout>
