@@ -33,10 +33,12 @@ class MediaSliderView @JvmOverloads constructor(
     var onPageSelected: (position: Int) -> Unit = {}
         set(value) {
             field = value
-            binding.vpSlider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            binding.vpSlider.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     field(position)
+                    adapter.stopPlayer()
                 }
             })
         }
@@ -44,7 +46,7 @@ class MediaSliderView @JvmOverloads constructor(
     var onImageTouchAction: () -> Unit = {}
         set(value) {
             field = value
-            adapter.onImageTouchAction = value
+            adapter.onPictureTouchAction = value
         }
 
     init {
@@ -55,7 +57,8 @@ class MediaSliderView @JvmOverloads constructor(
     private fun setupAttrs(attrs: AttributeSet?) {
         attrs.let {
             context.theme.obtainStyledAttributes(it, R.styleable.MediaSliderView, 0, 0).apply {
-                val isZoomEnable = getBoolean(R.styleable.MediaSliderView_double_tap_zoom_enabled, false)
+                val isZoomEnable =
+                    getBoolean(R.styleable.MediaSliderView_double_tap_zoom_enabled, false)
                 initViewsAndSetAdapter(isZoomEnable)
                 recycle()
             }

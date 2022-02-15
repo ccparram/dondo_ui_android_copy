@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dondo.ui.databinding.ElementImageBinding
 import com.dondo.ui.databinding.ElementVideoBinding
+import com.google.android.exoplayer2.Player
 
 class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
 .Adapter<RecyclerView.ViewHolder>() {
@@ -14,8 +15,9 @@ class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
     private val VIDEO_EXTENSION = ".mp4"
 
     private val elements = ArrayList<String>()
+    private var player: Player? = null
 
-    var onImageTouchAction: () -> Unit = {}
+    var onPictureTouchAction: () -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -25,7 +27,7 @@ class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
                     parent,
                     false
                 )
-            )
+            ) { player = it }
             else -> ImageViewHolder(
                 ElementImageBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -33,7 +35,7 @@ class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
                     false
                 ),
                 isZoomEnable,
-                onImageTouchAction
+                onPictureTouchAction
             )
         }
     }
@@ -60,5 +62,9 @@ class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
         this.elements.clear()
         this.elements.addAll(elements)
         notifyDataSetChanged()
+    }
+
+    fun stopPlayer() {
+        player?.stop()
     }
 }
