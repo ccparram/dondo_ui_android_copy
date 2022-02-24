@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Dondo UI</string>
     <string name="error_field_required">Este campo es requerido</string>
     <string name="error_minimum_length">Debe tener al menos %d caracteres</string>
     <string name="error_not_match_regex">Contiene caracteres no permitidos</string>

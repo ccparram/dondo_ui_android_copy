@@ -13,7 +13,7 @@ import com.dondo.demo.R
 import com.dondo.demo.test.TestBaseActivity
 import com.dondo.demo.test.TestBaseActivityTest
 import com.dondo.ui.formfields.EditTextField
-import org.junit.Assert
+import org.junit.Assert.assertFalse
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -67,7 +67,7 @@ class EditTextFieldTests: TestBaseActivityTest() {
             val field = activity.findViewById<EditTextField>(R.id.edfBase)
             val isValid = field.isValid()
 
-            Assert.assertFalse(isValid)
+            assertFalse(isValid)
         }
 
         onView(withText("Must be over 8 characters")).check(matches(isDisplayed()))
@@ -97,7 +97,7 @@ class EditTextFieldTests: TestBaseActivityTest() {
 
             val isValid = field.isValid()
 
-            Assert.assertFalse(isValid)
+            assertFalse(isValid)
         }
 
         editTextField.perform(typeText("1234567ff"))
@@ -106,7 +106,7 @@ class EditTextFieldTests: TestBaseActivityTest() {
             val field = activity.findViewById<EditTextField>(R.id.edfBase)
             val isValid = field.isValid()
 
-            Assert.assertFalse(isValid)
+            assertFalse(isValid)
         }
 
         onView(withText("Some of these characters are not permitted")).check(matches(isDisplayed()))

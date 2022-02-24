@@ -47,7 +47,7 @@ class EditTextField @JvmOverloads constructor(
     var hint = EMPTY
         set(value) {
             field = value
-            binding.tiContent.hint = field
+            binding.tilContent.hint = field
         }
 
     /**
