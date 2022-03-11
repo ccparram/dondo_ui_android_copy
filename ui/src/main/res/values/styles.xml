@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/transparent</item>
         <item name="colorPrimaryDark">@color/transparent</item>
@@ -32,5 +33,11 @@
         <item name="boxStrokeWidthFocused">0dp</item>
         <item name="errorEnabled">false</item>
         <item name="hintTextColor">@color/text_disabled</item>
+    </style>
+
+    <!--  This overrides the cursor handlers on text selected
+      Reference Link: https://medium.com/omisoft/textinputlayout-styling-8b36a5e0d73c-->
+    <style name="EditTextFieldThemeOverlay" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/green</item>
     </style>
 </resources>

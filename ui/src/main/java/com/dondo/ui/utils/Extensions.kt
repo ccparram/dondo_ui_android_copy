@@ -1,6 +1,7 @@
 package com.dondo.ui.utils
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -29,3 +30,6 @@ fun Context.getStringCompat(@StringRes id: Int): String = this.getString(id)
 fun Context.getDrawableCompat(@DrawableRes id: Int): Drawable? = ContextCompat.getDrawable(this, id)
 
 fun Context.getColorCompat(@ColorRes id: Int): Int = ContextCompat.getColor(this, id)
+
+fun Context.getColorStateListCompat(@ColorRes id: Int): ColorStateList? =
+    ContextCompat.getColorStateList(this, id)

@@ -17,6 +17,7 @@ import com.dondo.ui.databinding.FormFieldEditTextBinding
 import com.dondo.ui.utils.Constants.EMPTY
 import com.dondo.ui.utils.dpToPx
 import com.dondo.ui.utils.getColorCompat
+import com.dondo.ui.utils.getColorStateListCompat
 import com.dondo.ui.utils.getDrawableCompat
 import com.dondo.ui.utils.getStringCompat
 import com.dondo.ui.utils.isEmpty
@@ -41,13 +42,23 @@ class EditTextField @JvmOverloads constructor(
     lateinit var editText: AppCompatEditText
 
     /**
-     * Set hint message for component, default is EMPTY
+     * Set hint text for component, default is EMPTY
      * @param [hint] value to set as Hint
      * */
     var hint = EMPTY
         set(value) {
             field = value
             binding.tilContent.hint = field
+        }
+
+    /**
+     * Set placeholder text for component, default is EMPTY
+     * @param [placeholder] value to set as Hint
+     * */
+    var placeholder = EMPTY
+        set(value) {
+            field = value
+            binding.tilContent.placeholderText = field
         }
 
     /**
@@ -81,6 +92,7 @@ class EditTextField @JvmOverloads constructor(
             context.theme.obtainStyledAttributes(it, R.styleable.EditTextField, 0, 0).apply {
                 isRequired = getBoolean(R.styleable.EditTextField_is_required, false)
                 hint = getString(R.styleable.EditTextField_hint) ?: EMPTY
+                placeholder = getString(R.styleable.EditTextField_placeholder) ?: EMPTY
                 minLength = getInt(R.styleable.EditTextField_minLength, minLength)
                 maxLength = getInt(R.styleable.EditTextField_maxLength, maxLength)
                 minLines = getInt(R.styleable.EditTextField_minLines, minLines)
@@ -125,6 +137,7 @@ class EditTextField @JvmOverloads constructor(
             val gd = GradientDrawable().apply {
                 setStroke(2, getColorCompat(R.color.red))
                 cornerRadius = dpToPx(10f).toFloat()
+                color = getColorStateListCompat(R.color.elevation_1)
             }
 
             tvErrorLabel.text = errorMessage

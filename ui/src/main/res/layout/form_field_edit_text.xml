@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contRoot"
     android:layout_width="match_parent"
@@ -9,8 +10,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilContent"
         style="@style/MaterialDesignTextInputHint"
+        android:theme="@style/EditTextFieldThemeOverlay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:placeholderTextAppearance="@style/TextAppearance.Body1"
+        app:placeholderTextColor="@color/text_mid_emphasis">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etContent"

@@ -21,6 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name="com.dondo.demo.examples.MediaSliderDemoActivity" />
-        <activity android:name="com.dondo.demo.test.TestBaseActivity"  />
+        <activity android:name="com.dondo.demo.examples.TextFieldsActivity"  />
     </application>
 </manifest>
