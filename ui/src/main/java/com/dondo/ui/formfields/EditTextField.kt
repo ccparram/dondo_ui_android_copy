@@ -30,8 +30,7 @@ class EditTextField @JvmOverloads constructor(
 ) : LinearLayoutCompat(context, attrs, defStyleAttr), FormField {
 
     /**
-     * Set rule for component, default is false
-     * @param [isRequired] value to define if component must be filled
+     * Value to define if component must be filled, default is false
      * */
     var isRequired = false
     private var minLength = 0
@@ -42,10 +41,9 @@ class EditTextField @JvmOverloads constructor(
     lateinit var editText: AppCompatEditText
 
     /**
-     * Set hint text for component, default is EMPTY
-     * @param [hint] value to set as Hint
+     * Set title text for component, default is EMPTY
      * */
-    var hint = EMPTY
+    var title = EMPTY
         set(value) {
             field = value
             binding.tilContent.hint = field
@@ -53,7 +51,6 @@ class EditTextField @JvmOverloads constructor(
 
     /**
      * Set placeholder text for component, default is EMPTY
-     * @param [placeholder] value to set as Hint
      * */
     var placeholder = EMPTY
         set(value) {
@@ -63,13 +60,16 @@ class EditTextField @JvmOverloads constructor(
 
     /**
      * Set regex for String validation, default is null
-     * @param [regex] value to set as Regex
      * */
     var regex: String? = null
 
     /**
-     * Set text message for component, default is EditText String value
-     * @param [text] value to set as Text on field
+     * Set error message for regex validation, default is a generic message
+     * */
+    var regexErrorMessage: String = getStringCompat(R.string.error_not_match_regex)
+
+    /**
+     * Set text that view should display
      * */
     var text
         get() = editText.text.toString()
@@ -81,17 +81,17 @@ class EditTextField @JvmOverloads constructor(
 
     init {
         rootView
-        setup(attrs)
+        setupAttrs(attrs)
         doAfterTextChanged { isValid() }
     }
 
     override fun getRootView(): LinearLayoutCompat = binding.contRoot
 
-    override fun setup(attrs: AttributeSet?) {
+    private fun setupAttrs(attrs: AttributeSet?) {
         attrs.let {
             context.theme.obtainStyledAttributes(it, R.styleable.EditTextField, 0, 0).apply {
                 isRequired = getBoolean(R.styleable.EditTextField_is_required, false)
-                hint = getString(R.styleable.EditTextField_hint) ?: EMPTY
+                title = getString(R.styleable.EditTextField_hint) ?: EMPTY
                 placeholder = getString(R.styleable.EditTextField_placeholder) ?: EMPTY
                 minLength = getInt(R.styleable.EditTextField_minLength, minLength)
                 maxLength = getInt(R.styleable.EditTextField_maxLength, maxLength)
@@ -121,8 +121,8 @@ class EditTextField @JvmOverloads constructor(
         }
 
     /**
-     * Transforms Edittext doAfterTextChanged action so it returns a String and not an EditText
-     * @param [action] Returns a String value for the action
+     * Add an action which will be invoked when the text is changing
+     * @param action which will be invoked after the text is changed with the text as param
      * */
     fun doAfterTextChanged(action: (text: String) -> Unit) {
         this.editText.doAfterTextChanged { action(it.toString()) }
@@ -130,9 +130,9 @@ class EditTextField @JvmOverloads constructor(
 
     /**
      * Set error message to show
-     * @param [errorMessage] String resource to set as error
+     * @param errorMessage String resource to set as error
      * */
-    fun showError(errorMessage: String) {
+    private fun showError(errorMessage: String) {
         with(binding) {
             val gd = GradientDrawable().apply {
                 setStroke(2, getColorCompat(R.color.red))
@@ -184,10 +184,9 @@ class EditTextField @JvmOverloads constructor(
             if (Pattern.compile(it).matcher(text).matches()) {
                 true
             } else {
-                showError(String.format(getStringCompat(R.string.error_not_match_regex), minLength))
+                showError(regexErrorMessage)
                 false
             }
         } ?: true
     }
 }
-

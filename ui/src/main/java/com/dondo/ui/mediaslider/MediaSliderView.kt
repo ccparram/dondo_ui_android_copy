@@ -34,13 +34,13 @@ class MediaSliderView @JvmOverloads constructor(
         set(value) {
             field = value
             binding.vpSlider.registerOnPageChangeCallback(object :
-                ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    field(position)
-                    adapter.stopPlayer()
-                }
-            })
+                    ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        field(position)
+                        adapter.stopPlayer()
+                    }
+                })
         }
 
     var onImageTouchAction: () -> Unit = {}
