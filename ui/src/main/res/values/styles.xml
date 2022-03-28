@@ -10,4 +10,34 @@
     <style name="ProgressBar" parent="AppTheme">
         <item name="colorAccent">@color/progressbarColor</item>
     </style>
+
+    <style name="TextAppearance.Body" parent="android:style/TextAppearance">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/text_high_emphasis</item>
+    </style>
+
+    <style name="TextAppearance.Body1" parent="TextAppearance.Body">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="MaterialDesignTextInputHint" parent="ThemeOverlay.Material3.AutoCompleteTextView.FilledBox">
+        <item name="android:textColorHint">@color/text_mid_emphasis</item>
+        <item name="android:textColorHighlight">@color/text_disabled</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/green</item>
+        <item name="android:minHeight">@dimen/edittext_min_height</item>
+        <item name="boxCollapsedPaddingTop">@dimen/padding_normal_50</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxBackgroundMode">filled</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="errorEnabled">false</item>
+        <item name="hintTextColor">@color/text_disabled</item>
+    </style>
+
+    <!--  This overrides the cursor handlers on text selected
+      Reference Link: https://medium.com/omisoft/textinputlayout-styling-8b36a5e0d73c-->
+    <style name="EditTextFieldThemeOverlay" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@color/green</item>
+    </style>
 </resources>

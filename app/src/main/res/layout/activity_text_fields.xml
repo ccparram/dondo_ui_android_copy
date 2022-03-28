@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:theme="@style/AppTheme">
+
+    <com.dondo.ui.formfields.EditTextField
+        android:id="@+id/e"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="With placeholder"
+        app:placeholder="Enter some text" />
+
+    <com.dondo.ui.formfields.EditTextField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:hint="Without placeholder" />
+
+    <com.dondo.ui.formfields.EditTextField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:hint="required with min length = 8"
+        app:is_required="true"
+        app:minLength="8" />
+
+    <com.dondo.ui.formfields.EditTextField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:hint="required with max length = 4"
+        app:maxLength="4" />
+</androidx.appcompat.widget.LinearLayoutCompat>
