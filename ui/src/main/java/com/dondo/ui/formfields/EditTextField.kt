@@ -29,9 +29,6 @@ class EditTextField @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayoutCompat(context, attrs, defStyleAttr), FormField {
 
-    /**
-     * Value to define if component must be filled, default is false
-     * */
     var isRequired = false
     private var minLength = 0
     private var maxLength = -1
@@ -40,37 +37,20 @@ class EditTextField @JvmOverloads constructor(
     private var inputType = TYPE_CLASS_TEXT
     lateinit var editText: AppCompatEditText
 
-    /**
-     * Set title text for component, default is EMPTY
-     * */
     var title = EMPTY
         set(value) {
             field = value
             binding.tilContent.hint = field
         }
 
-    /**
-     * Set placeholder text for component, default is EMPTY
-     * */
     var placeholder = EMPTY
         set(value) {
             field = value
             binding.tilContent.placeholderText = field
         }
 
-    /**
-     * Set regex for String validation, default is null
-     * */
     var regex: String? = null
-
-    /**
-     * Set error message for regex validation, default is a generic message
-     * */
     var regexErrorMessage: String = getStringCompat(R.string.error_not_match_regex)
-
-    /**
-     * Set text that view should display
-     * */
     var text
         get() = editText.text.toString()
         set(value) = editText.setText(value)
@@ -120,18 +100,8 @@ class EditTextField @JvmOverloads constructor(
             false
         }
 
-    /**
-     * Add an action which will be invoked when the text is changing
-     * @param action which will be invoked after the text is changed with the text as param
-     * */
-    fun doAfterTextChanged(action: (text: String) -> Unit) {
-        this.editText.doAfterTextChanged { action(it.toString()) }
-    }
+    fun doAfterTextChanged(action: (text: String) -> Unit) = editText.doAfterTextChanged { action(it.toString()) }
 
-    /**
-     * Set error message to show
-     * @param errorMessage String resource to set as error
-     * */
     private fun showError(errorMessage: String) {
         with(binding) {
             val gd = GradientDrawable().apply {
