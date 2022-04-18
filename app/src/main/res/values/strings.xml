@@ -1,3 +1,3 @@
 <resources>
-    <string name="app_name">Dondo UI Demo</string>
+    <string name="app_name" translatable="false">Dondo UI Demo</string>
 </resources>
