@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:theme="@style/AppTheme">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Inverse"
+        android:layout_marginBottom="16dp"
+        android:text="Not verified"
+        tools:ignore="HardcodedText" />
+
+    <com.dondo.ui.mediaslider.ProfilePictureView
+        android:id="@+id/profilePicture1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Inverse"
+        android:layout_marginBottom="16dp"
+        android:text="Verified"
+        tools:ignore="HardcodedText" />
+
+    <com.dondo.ui.mediaslider.ProfilePictureView
+        android:id="@+id/profilePicture2"
+        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Inverse"
+        android:layout_marginBottom="16dp"
+        android:text="Wrong url"
+        tools:ignore="HardcodedText" />
+
+    <com.dondo.ui.mediaslider.ProfilePictureView
+        android:id="@+id/profilePicture3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Inverse"
+        android:layout_marginBottom="16dp"
+        android:text="Without setting an url"
+        tools:ignore="HardcodedText" />
+
+    <com.dondo.ui.mediaslider.ProfilePictureView
+        android:id="@+id/profilePicture4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</androidx.appcompat.widget.LinearLayoutCompat>
