@@ -9,10 +9,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilContent"
-        style="@style/MaterialDesignTextInputHint"
-        android:theme="@style/EditTextFieldThemeOverlay"
+        style="@style/MaterialEditTextField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/EditTextFieldThemeOverlay"
         app:placeholderTextAppearance="@style/TextAppearance.Body1"
         app:placeholderTextColor="@color/text_mid_emphasis">
 
@@ -23,8 +23,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/text_field_states"
             android:minHeight="@dimen/edittext_min_height"
-            android:paddingHorizontal="16dp"
-            android:paddingTop="@dimen/padding_normal_50"
+            android:paddingHorizontal="@dimen/padding_normal_100"
+            android:paddingTop="@dimen/padding_normal_112"
             android:textColor="@color/text_high_emphasis"
             android:textCursorDrawable="@drawable/color_cursor_green" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -36,6 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_normal_50"
         android:textColor="@color/text_error"
-        tools:text="@string/error_field_required" />
+        android:visibility="gone"
+        tools:text="@string/error_field_required"
+        tools:visibility="visible" />
 </androidx.appcompat.widget.LinearLayoutCompat>
 

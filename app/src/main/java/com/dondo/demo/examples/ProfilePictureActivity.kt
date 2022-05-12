@@ -3,7 +3,7 @@ package com.dondo.demo.examples
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dondo.demo.databinding.ActivityProfilePictureBinding
-import com.dondo.ui.utils.viewBinding
+import com.dondo.ui.utils.extensions.viewBinding
 
 class ProfilePictureActivity : AppCompatActivity() {
 

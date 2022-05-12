@@ -8,7 +8,6 @@
     </declare-styleable>
 
     <declare-styleable name="EditTextField">
-        <attr name="android:inputType" />
         <attr name="android:imeOptions" />
         <attr name="is_required" />
         <attr name="hint" />
@@ -17,5 +16,13 @@
         <attr name="maxLength" format="integer" />
         <attr name="minLines" format="integer" />
         <attr name="maxLines" format="integer" />
+        <attr name="textType" format="enum">
+            <enum name="text" value="0" />
+            <enum name="multiline" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="QuantityPicker">
+        <attr name="quantityPickerNextFocusDown" format="reference"/>
     </declare-styleable>
 </resources>

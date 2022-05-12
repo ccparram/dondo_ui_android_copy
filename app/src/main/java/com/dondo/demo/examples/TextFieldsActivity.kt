@@ -1,9 +1,10 @@
 package com.dondo.demo.examples
 
 import android.os.Bundle
+import android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 import androidx.appcompat.app.AppCompatActivity
 import com.dondo.demo.databinding.ActivityTextFieldsBinding
-import com.dondo.ui.utils.viewBinding
+import com.dondo.ui.utils.extensions.viewBinding
 
 class TextFieldsActivity : AppCompatActivity() {
 
@@ -14,5 +15,6 @@ class TextFieldsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.e.isRequired
+        binding.m.inputType = TYPE_TEXT_FLAG_MULTI_LINE
     }
 }

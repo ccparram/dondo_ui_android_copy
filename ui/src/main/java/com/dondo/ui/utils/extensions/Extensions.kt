@@ -1,4 +1,4 @@
-package com.dondo.ui.utils
+package com.dondo.ui.utils.extensions
 
 import android.content.Context
 import android.content.res.ColorStateList

@@ -6,8 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dondo.demo.databinding.ActivityMainBinding
 import com.dondo.demo.examples.MediaSliderDemoActivity
 import com.dondo.demo.examples.ProfilePictureActivity
+import com.dondo.demo.examples.QuantityPickerActivity
 import com.dondo.demo.examples.TextFieldsActivity
-import com.dondo.ui.utils.viewBinding
+import com.dondo.ui.utils.extensions.viewBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +33,10 @@ class MainActivity : AppCompatActivity() {
 
             btProfilePicture.setOnClickListener {
                 startActivity(Intent(this@MainActivity, ProfilePictureActivity::class.java))
+            }
+
+            btQuantityPicker.setOnClickListener {
+                startActivity(Intent(this@MainActivity, QuantityPickerActivity::class.java))
             }
         }
     }

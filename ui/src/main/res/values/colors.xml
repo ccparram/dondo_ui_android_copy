@@ -8,6 +8,9 @@
     <color name="transparent_clear">#00000000</color>
     <color name="green">#77F16D</color>
     <color name="red">#CA4047</color>
+    <color name="greyPale">#E7E5EC</color>
+
+    <color name="darkG1">#E7E5EC</color>
 
     <!-- Elevation -->
     <color name="elevation_background">#0B0B0B</color>
@@ -28,4 +31,8 @@
     <color name="text_button_primary_enabled">@color/elevation_background</color>
     <color name="text_button_secondary_enabled">@color/main_primary</color>
     <color name="text_button_disabled">@color/text_disabled</color>
+
+    <!--  Quantity picker  -->
+    <color name="quantity_picker_action_disabled">@color/text_disabled</color>
+    <color name="quantity_picker_action_enable">@color/greyPale</color>
 </resources>
