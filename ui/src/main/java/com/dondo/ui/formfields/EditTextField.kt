@@ -109,6 +109,14 @@ class EditTextField @JvmOverloads constructor(
 
     fun doAfterTextChanged(action: (text: String) -> Unit) = editText.doAfterTextChanged { action(it.toString()) }
 
+    fun showErrorField(errorMessage: String) {
+        showError(errorMessage)
+    }
+
+    fun hideErrorField() {
+        hideError()
+    }
+
     private fun showError(errorMessage: String) {
         with(binding) {
             val gd = GradientDrawable().apply {
