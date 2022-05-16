@@ -24,7 +24,8 @@
             android:background="@drawable/text_field_states"
             android:minHeight="@dimen/edittext_min_height"
             android:paddingHorizontal="@dimen/padding_normal_100"
-            android:paddingTop="@dimen/padding_normal_112"
+            android:paddingTop="@dimen/padding_normal_150"
+            android:gravity="top|left"
             android:textColor="@color/text_high_emphasis"
             android:textCursorDrawable="@drawable/color_cursor_green" />
     </com.google.android.material.textfield.TextInputLayout>

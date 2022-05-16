@@ -14,7 +14,6 @@ class QuantityPickerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
         binding.qp.doAfterQuantityChange {
             Toast.makeText(this, "New value: $it", Toast.LENGTH_SHORT).show()
         }
