@@ -3,7 +3,7 @@ package com.dondo.demo.examples
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dondo.demo.databinding.ActivityTextFieldsBinding
-import com.dondo.ui.utils.viewBinding
+import com.dondo.ui.utils.extensions.viewBinding
 
 class TextFieldsActivity : AppCompatActivity() {
 
@@ -12,7 +12,5 @@ class TextFieldsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        binding.e.isRequired
     }
 }

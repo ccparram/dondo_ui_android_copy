@@ -29,4 +29,12 @@
         android:layout_marginTop="@dimen/margin_normal_50"
         android:text="Profile Picture"
         tools:ignore="HardcodedText" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btQuantityPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_50"
+        android:text="Quantity picker"
+        tools:ignore="HardcodedText" />
 </androidx.appcompat.widget.LinearLayoutCompat>

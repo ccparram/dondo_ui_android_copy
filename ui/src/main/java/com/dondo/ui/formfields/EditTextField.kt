@@ -8,19 +8,20 @@ import android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 import android.util.AttributeSet
 import android.util.Patterns.EMAIL_ADDRESS
 import android.view.LayoutInflater
+import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import com.dondo.ui.R
 import com.dondo.ui.databinding.FormFieldEditTextBinding
 import com.dondo.ui.utils.Constants.EMPTY
-import com.dondo.ui.utils.dpToPx
-import com.dondo.ui.utils.getColorCompat
-import com.dondo.ui.utils.getColorStateListCompat
-import com.dondo.ui.utils.getDrawableCompat
-import com.dondo.ui.utils.getStringCompat
-import com.dondo.ui.utils.isEmpty
+import com.dondo.ui.utils.extensions.dpToPx
+import com.dondo.ui.utils.extensions.getColorCompat
+import com.dondo.ui.utils.extensions.getColorStateListCompat
+import com.dondo.ui.utils.extensions.getDrawableCompat
+import com.dondo.ui.utils.extensions.getStringCompat
+import com.dondo.ui.utils.extensions.isEmpty
 import java.util.regex.Pattern
 
 class EditTextField @JvmOverloads constructor(
@@ -29,13 +30,35 @@ class EditTextField @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayoutCompat(context, attrs, defStyleAttr), FormField {
 
+    private val binding: FormFieldEditTextBinding by lazy {
+        FormFieldEditTextBinding.inflate(LayoutInflater.from(context), this, true)
+    }
+
     var isRequired = false
-    private var minLength = 0
-    private var maxLength = -1
+    var minLength = 0
     private var minLines = 1
     private var maxLines = 1
-    private var inputType = TYPE_CLASS_TEXT
-    lateinit var editText: AppCompatEditText
+    var editText: AppCompatEditText = binding.etContent
+
+    var inputType = TYPE_CLASS_TEXT
+        set(value) {
+            field = value
+            editText.inputType = field
+        }
+
+    var maxLength = -1
+        set(value) {
+            field = value
+            val maxLengthFilter = InputFilter.LengthFilter(value)
+
+            if (value > 0) {
+                editText.filters = arrayOf(maxLengthFilter)
+            } else {
+                val filters = editText.filters.filterNot { it == maxLengthFilter }.toTypedArray()
+
+                editText.filters = filters
+            }
+        }
 
     var title = EMPTY
         set(value) {
@@ -54,10 +77,6 @@ class EditTextField @JvmOverloads constructor(
     var text
         get() = editText.text.toString()
         set(value) = editText.setText(value)
-
-    private val binding: FormFieldEditTextBinding by lazy {
-        FormFieldEditTextBinding.inflate(LayoutInflater.from(context), this, true)
-    }
 
     init {
         rootView
@@ -78,17 +97,11 @@ class EditTextField @JvmOverloads constructor(
                 minLines = getInt(R.styleable.EditTextField_minLines, minLines)
                 maxLines = getInt(R.styleable.EditTextField_minLines, maxLines)
                 inputType = getInt(R.styleable.EditTextField_android_inputType, TYPE_CLASS_TEXT)
+
+                editText.minLines = minLines
+                editText.maxLines = maxLines
                 recycle()
             }
-        }
-
-        editText = binding.etContent
-        editText.minLines = minLines
-        editText.maxLines = maxLines
-        editText.inputType = inputType
-
-        if (maxLength >= 0) {
-            editText.filters = arrayOf(InputFilter.LengthFilter(maxLength))
         }
     }
 
@@ -102,6 +115,14 @@ class EditTextField @JvmOverloads constructor(
 
     fun doAfterTextChanged(action: (text: String) -> Unit) = editText.doAfterTextChanged { action(it.toString()) }
 
+    fun showErrorField(errorMessage: String) {
+        showError(errorMessage)
+    }
+
+    fun hideErrorField() {
+        hideError()
+    }
+
     private fun showError(errorMessage: String) {
         with(binding) {
             val gd = GradientDrawable().apply {
@@ -111,14 +132,14 @@ class EditTextField @JvmOverloads constructor(
             }
 
             tvErrorLabel.text = errorMessage
-            tvErrorLabel.isInvisible = false
+            tvErrorLabel.isVisible = true
             editText.background = gd
         }
     }
 
     private fun hideError() {
         with(binding) {
-            tvErrorLabel.isInvisible = true
+            tvErrorLabel.isVisible = false
             editText.background = getDrawableCompat(R.drawable.text_field_states)
         }
     }
@@ -149,14 +170,24 @@ class EditTextField @JvmOverloads constructor(
         }
     }
 
-    private fun validateRegex(): Boolean {
-        return regex?.let {
-            if (Pattern.compile(it).matcher(text).matches()) {
-                true
-            } else {
-                showError(regexErrorMessage)
-                false
-            }
-        } ?: true
+    private fun validateRegex(): Boolean = regex?.let {
+        if (Pattern.compile(it).matcher(text).matches()) {
+            true
+        } else {
+            showError(regexErrorMessage)
+            false
+        }
+    } ?: true
+
+    fun validateEqualTo(
+        editText: EditTextField,
+        editTextToCompare: EditTextField,
+        @StringRes error: Int
+    ): Boolean = if (editText.text == editTextToCompare.text) {
+        editText.showError(getStringCompat(error))
+        editTextToCompare.showError(getStringCompat(error))
+        true
+    } else {
+        false
     }
 }

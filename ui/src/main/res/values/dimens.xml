@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_normal_50">8dp</dimen>
+    <dimen name="margin_normal_100">16dp</dimen>
 
     <dimen name="padding_normal_0">0dp</dimen>
     <dimen name="padding_normal_12">2dp</dimen>
     <dimen name="padding_normal_25">4dp</dimen>
     <dimen name="padding_normal_50">8dp</dimen>
+    <dimen name="padding_normal_100">16dp</dimen>
+    <dimen name="padding_normal_112">18dp</dimen>
+    <dimen name="padding_normal_125">20dp</dimen>
+    <dimen name="padding_normal_150">24dp</dimen>
 
     <dimen name="corners_width">1dp</dimen>
 
@@ -17,4 +22,7 @@
     <dimen name="radius_8">8dp</dimen>
     <dimen name="radius_10">10dp</dimen>
     <dimen name="radius_15">15dp</dimen>
+
+    <!-- Quantity Picker -->
+    <dimen name="quantity_picker_max_height">60dp</dimen>
 </resources>

@@ -3,4 +3,6 @@
     <string name="error_field_required">This field is required</string>
     <string name="error_minimum_length">Must be over %d characters</string>
     <string name="error_not_match_regex">Some of these characters are not permitted</string>
+
+    <string name="quantity_picker_label">How many do you have in stock?</string>
 </resources>
