@@ -49,11 +49,14 @@ class EditTextField @JvmOverloads constructor(
     var maxLength = -1
         set(value) {
             field = value
+            val maxLengthFilter = InputFilter.LengthFilter(value)
 
-            editText.filters = if (maxLength >= 0) {
-                 arrayOf(InputFilter.LengthFilter(maxLength))
+            if (value > 0) {
+                editText.filters = arrayOf(maxLengthFilter)
             } else {
-                arrayOf<InputFilter>()
+                val filters = editText.filters.filterNot { it == maxLengthFilter }.toTypedArray()
+
+                editText.filters = filters
             }
         }
 

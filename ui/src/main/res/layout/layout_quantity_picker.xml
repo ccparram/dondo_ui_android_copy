@@ -31,7 +31,7 @@
             android:background="@drawable/bg_quantity_picker"
             android:gravity="center"
             android:imeOptions="actionNext"
-            android:inputType="number"
+            android:inputType="number|phone"
             android:lines="1"
             android:maxHeight="@dimen/quantity_picker_max_height"
             android:maxLines="1"
