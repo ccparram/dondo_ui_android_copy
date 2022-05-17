@@ -10,7 +10,7 @@ import coil.transform.CircleCropTransformation
 import com.dondo.ui.R
 import com.dondo.ui.databinding.ProfilePictureViewBinding
 import com.dondo.ui.utils.Constants.EMPTY
-import com.dondo.ui.utils.getDrawableCompat
+import com.dondo.ui.utils.extensions.getDrawableCompat
 
 class ProfilePictureView @JvmOverloads constructor(
     context: Context,

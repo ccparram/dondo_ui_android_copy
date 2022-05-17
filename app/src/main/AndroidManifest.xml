@@ -23,5 +23,6 @@
         <activity android:name="com.dondo.demo.examples.MediaSliderDemoActivity" />
         <activity android:name="com.dondo.demo.examples.TextFieldsActivity" />
         <activity android:name="com.dondo.demo.examples.ProfilePictureActivity" />
+        <activity android:name="com.dondo.demo.examples.QuantityPickerActivity" />
     </application>
 </manifest>
