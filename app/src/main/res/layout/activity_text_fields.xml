@@ -8,7 +8,6 @@
     android:theme="@style/AppTheme">
 
     <com.dondo.ui.formfields.EditTextField
-        android:id="@+id/e"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:hint="With placeholder"
@@ -36,11 +35,12 @@
         app:maxLength="4" />
 
     <com.dondo.ui.formfields.EditTextField
-        android:id="@+id/m"
+        android:id="@+id/etMultiline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:hint="multiline text field"
         app:placeholder="Enter some text"
-        app:textType="multiline" />
+        app:minLines="4"
+        android:inputType="textMultiLine" />
 </androidx.appcompat.widget.LinearLayoutCompat>

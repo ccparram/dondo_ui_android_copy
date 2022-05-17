@@ -4,12 +4,9 @@ import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.text.InputFilter
 import android.text.InputType.TYPE_CLASS_TEXT
-import android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 import android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 import android.util.AttributeSet
 import android.util.Patterns.EMAIL_ADDRESS
-import android.view.Gravity.LEFT
-import android.view.Gravity.TOP
 import android.view.LayoutInflater
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatEditText
@@ -19,10 +16,6 @@ import androidx.core.widget.doAfterTextChanged
 import com.dondo.ui.R
 import com.dondo.ui.databinding.FormFieldEditTextBinding
 import com.dondo.ui.utils.Constants.EMPTY
-import com.dondo.ui.utils.EditTexFieldType
-import com.dondo.ui.utils.EditTexFieldType.TYPE_MULTILINE
-import com.dondo.ui.utils.EditTexFieldType.TYPE_TEXT
-import com.dondo.ui.utils.extensions.applyMargin
 import com.dondo.ui.utils.extensions.dpToPx
 import com.dondo.ui.utils.extensions.getColorCompat
 import com.dondo.ui.utils.extensions.getColorStateListCompat
@@ -51,13 +44,6 @@ class EditTextField @JvmOverloads constructor(
         set(value) {
             field = value
             editText.inputType = field
-
-            if(field == TYPE_TEXT_FLAG_MULTI_LINE) {
-                editText.isSingleLine = false
-                editText.minLines = 4
-                editText.gravity = TOP or LEFT
-                editText.setPadding(dpToPx(16f), dpToPx(25f), dpToPx(16f), dpToPx(16f))
-            }
         }
 
     var maxLength = -1
@@ -90,8 +76,8 @@ class EditTextField @JvmOverloads constructor(
         set(value) = editText.setText(value)
 
     init {
-        setupAttrs(attrs)
         rootView
+        setupAttrs(attrs)
         doAfterTextChanged { isValid() }
     }
 
@@ -100,32 +86,18 @@ class EditTextField @JvmOverloads constructor(
     private fun setupAttrs(attrs: AttributeSet?) {
         attrs.let {
             context.theme.obtainStyledAttributes(it, R.styleable.EditTextField, 0, 0).apply {
-                try {
-                    isRequired = getBoolean(R.styleable.EditTextField_is_required, false)
-                    title = getString(R.styleable.EditTextField_hint) ?: EMPTY
-                    placeholder = getString(R.styleable.EditTextField_placeholder) ?: EMPTY
-                    minLength = getInt(R.styleable.EditTextField_minLength, minLength)
-                    maxLength = getInt(R.styleable.EditTextField_maxLength, maxLength)
-                    minLines = getInt(R.styleable.EditTextField_minLines, minLines)
-                    maxLines = getInt(R.styleable.EditTextField_minLines, maxLines)
+                isRequired = getBoolean(R.styleable.EditTextField_is_required, false)
+                title = getString(R.styleable.EditTextField_hint) ?: EMPTY
+                placeholder = getString(R.styleable.EditTextField_placeholder) ?: EMPTY
+                minLength = getInt(R.styleable.EditTextField_minLength, minLength)
+                maxLength = getInt(R.styleable.EditTextField_maxLength, maxLength)
+                minLines = getInt(R.styleable.EditTextField_minLines, minLines)
+                maxLines = getInt(R.styleable.EditTextField_minLines, maxLines)
+                inputType = getInt(R.styleable.EditTextField_android_inputType, TYPE_CLASS_TEXT)
 
-                    val editTexFieldType = EditTexFieldType.getByValue(getInt(R.styleable.EditTextField_textType, TYPE_TEXT.value))
-
-                    inputType = if(editTexFieldType == TYPE_MULTILINE) {
-                        TYPE_TEXT_FLAG_MULTI_LINE
-                    } else {
-                        TYPE_CLASS_TEXT
-                    }
-
-                    editText.minLines = minLines
-                    editText.maxLines = maxLines
-
-                    if (maxLength >= 0) {
-                        editText.filters = arrayOf(InputFilter.LengthFilter(maxLength))
-                    }
-                } finally {
-                    recycle()
-                }
+                editText.minLines = minLines
+                editText.maxLines = maxLines
+                recycle()
             }
         }
     }
@@ -139,12 +111,6 @@ class EditTextField @JvmOverloads constructor(
         }
 
     fun doAfterTextChanged(action: (text: String) -> Unit) = editText.doAfterTextChanged { action(it.toString()) }
-
-    fun addTopMargin(topMargin: Float) {
-        rootView.apply {
-            applyMargin(top = topMargin)
-        }
-    }
 
     fun showErrorField(errorMessage: String) {
         showError(errorMessage)
@@ -202,13 +168,13 @@ class EditTextField @JvmOverloads constructor(
     }
 
     private fun validateRegex(): Boolean = regex?.let {
-            if (Pattern.compile(it).matcher(text).matches()) {
-                true
-            } else {
-                showError(regexErrorMessage)
-                false
-            }
-        } ?: true
+        if (Pattern.compile(it).matcher(text).matches()) {
+            true
+        } else {
+            showError(regexErrorMessage)
+            false
+        }
+    } ?: true
 
     fun validateEqualTo(
         editText: EditTextField,
