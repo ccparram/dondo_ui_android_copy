@@ -24,6 +24,8 @@ class QuantityPicker @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
+    private lateinit var editText: AppCompatEditText
+
     // 5000 is the max stock defined in BE
     var maxValue: Int = 5000
         set(value) {
@@ -38,15 +40,17 @@ class QuantityPicker @JvmOverloads constructor(
     }
 
     var quantity = minValue
-        get() = binding.etQuantity.toIntOrMin()
+        get() = editText.toIntOrMin()
         set(value) {
             field = value
-            binding.etQuantity.setText(value.toString())
+            editText.setText(value.toString())
             updateSideControls()
         }
 
     init {
         rootView
+        editText = binding.etQuantity
+        quantity = minValue
         setupAttrs(attrs)
         setListeners()
         updateRangeFilter()
@@ -59,7 +63,7 @@ class QuantityPicker @JvmOverloads constructor(
             try {
                 getResourceId(R.styleable.QuantityPicker_quantityPickerNextFocusDown, 0).let { nextId ->
                     if (nextId != 0) {
-                        binding.etQuantity.nextFocusDownId = nextId
+                        editText.nextFocusDownId = nextId
                     }
                 }
             } finally {
@@ -97,7 +101,7 @@ class QuantityPicker @JvmOverloads constructor(
     }
 
     private fun updateRangeFilter() {
-        binding.etQuantity.filters = arrayOf(InputFilterMinMax(minValue, maxValue))
+        editText.filters = arrayOf(InputFilterMinMax(minValue, maxValue))
     }
 
     private fun setListeners() {
@@ -127,9 +131,9 @@ class QuantityPicker @JvmOverloads constructor(
         }
     }
 
-    private fun validateQuantity() : Int =
-        if (!binding.etQuantity.text.isNullOrEmpty()) {
-            val newCount = binding.etQuantity.text.toString().toInt()
+    private fun validateQuantity(): Int =
+        if (!editText.text.isNullOrEmpty()) {
+            val newCount = editText.text.toString().toInt()
 
             if (newCount in minValue..maxValue) newCount else oldQuantity
         } else minValue
@@ -147,7 +151,7 @@ class QuantityPicker @JvmOverloads constructor(
     }
 
     fun doAfterQuantityChange(action: (quantity: Int) -> Unit) =
-        binding.etQuantity.doAfterTextChanged { action(validateQuantity()) }
+        editText.doAfterTextChanged { action(validateQuantity()) }
 
     inner class InputFilterMinMax(private val min: Int, private val max: Int) : InputFilter {
 
@@ -170,19 +174,19 @@ class QuantityPicker @JvmOverloads constructor(
                 EMPTY
             }
 
-        private fun isInRange(a:Int, b:Int, c:Int):Boolean = if (b > a) c in a..b else c in b..a
+        private fun isInRange(a: Int, b: Int, c: Int): Boolean = if (b > a) c in a..b else c in b..a
     }
 
     private fun AppCompatImageView.setStateFromCondition(condition: Boolean) {
-       with(this) {
-           isClickable = if (condition) {
-               setColorFilter(getColorCompat(R.color.quantity_picker_action_disabled))
-               false
-           } else {
-               setColorFilter(getColorCompat(R.color.quantity_picker_action_enable))
-               true
-           }
-       }
+        with(this) {
+            isClickable = if (condition) {
+                setColorFilter(getColorCompat(R.color.quantity_picker_action_disabled))
+                false
+            } else {
+                setColorFilter(getColorCompat(R.color.quantity_picker_action_enable))
+                true
+            }
+        }
     }
 
     private fun AppCompatEditText.toIntOrMin() =
