@@ -95,8 +95,8 @@ class QuantityPicker @JvmOverloads constructor(
      */
     private fun updateSideControls() {
         with(binding) {
-            ivNegative.setStateFromCondition(quantity == minValue)
-            ivPositive.setStateFromCondition(quantity == maxValue)
+            ivNegative.setStateFromCondition(quantity == minValue, ::subtract)
+            ivPositive.setStateFromCondition(quantity == maxValue, ::add)
         }
     }
 
@@ -106,24 +106,8 @@ class QuantityPicker @JvmOverloads constructor(
 
     private fun setListeners() {
         with(binding) {
-            ivNegative.setSafeOnClickListener {
-                subtract()
-            }
-
-            ivPositive.setSafeOnClickListener {
-                add()
-            }
-
             with(etQuantity) {
                 setOnFocusChangeListener { _, hasFocus ->
-                    if (hasFocus) {
-                        oldQuantity = text.toString().takeUnless { it.isEmpty() }?.toInt() ?: minValue
-                        setSelection(length())
-                    } else {
-                        setText(validateQuantity().toString())
-                        updateSideControls()
-                    }
-
                     ivNegative.isVisible = !hasFocus
                     ivPositive.isVisible = !hasFocus
                 }
@@ -132,11 +116,12 @@ class QuantityPicker @JvmOverloads constructor(
     }
 
     private fun validateQuantity(): Int =
-        if (!editText.text.isNullOrEmpty()) {
+        if (editText.text.isNullOrEmpty()) {
+            minValue
+        } else {
             val newCount = editText.text.toString().toInt()
-
             if (newCount in minValue..maxValue) newCount else oldQuantity
-        } else minValue
+        }
 
     private fun add() {
         if (quantity != maxValue) {
@@ -151,7 +136,10 @@ class QuantityPicker @JvmOverloads constructor(
     }
 
     fun doAfterQuantityChange(action: (quantity: Int) -> Unit) =
-        editText.doAfterTextChanged { action(validateQuantity()) }
+        editText.doAfterTextChanged {
+            action(validateQuantity())
+            updateSideControls()
+        }
 
     inner class InputFilterMinMax(private val min: Int, private val max: Int) : InputFilter {
 
@@ -177,14 +165,14 @@ class QuantityPicker @JvmOverloads constructor(
         private fun isInRange(a: Int, b: Int, c: Int): Boolean = if (b > a) c in a..b else c in b..a
     }
 
-    private fun AppCompatImageView.setStateFromCondition(condition: Boolean) {
+    private fun AppCompatImageView.setStateFromCondition(condition: Boolean, action: () -> Unit) {
         with(this) {
-            isClickable = if (condition) {
+            if (condition) {
                 setColorFilter(getColorCompat(R.color.quantity_picker_action_disabled))
-                false
+                setSafeOnClickListener { }
             } else {
                 setColorFilter(getColorCompat(R.color.quantity_picker_action_enable))
-                true
+                setSafeOnClickListener { action() }
             }
         }
     }
