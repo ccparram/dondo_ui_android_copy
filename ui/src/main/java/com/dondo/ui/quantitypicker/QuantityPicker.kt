@@ -3,6 +3,7 @@ package com.dondo.ui.quantitypicker
 import android.content.Context
 import android.text.InputFilter
 import android.text.Spanned
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.annotation.StringRes
@@ -24,7 +25,10 @@ class QuantityPicker @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
-    private lateinit var editText: AppCompatEditText
+    private var editText: AppCompatEditText
+
+    var doAfterQuantityChange: (quantity: Int) -> Unit = {}
+    var textWatcher: TextWatcher? = null
 
     // 5000 is the max stock defined in BE
     var maxValue: Int = 5000
@@ -44,6 +48,7 @@ class QuantityPicker @JvmOverloads constructor(
         set(value) {
             field = value
             editText.setText(value.toString())
+            editText.setSelection(editText.text.toString().length)
             updateSideControls()
         }
 
@@ -106,11 +111,17 @@ class QuantityPicker @JvmOverloads constructor(
 
     private fun setListeners() {
         with(binding) {
-            with(etQuantity) {
-                setOnFocusChangeListener { _, hasFocus ->
-                    ivNegative.isVisible = !hasFocus
-                    ivPositive.isVisible = !hasFocus
-                }
+            etQuantity.setOnFocusChangeListener { _, hasFocus ->
+                ivNegative.isVisible = !hasFocus
+                ivPositive.isVisible = !hasFocus
+            }
+
+            textWatcher = etQuantity.doAfterTextChanged {
+                etQuantity.removeTextChangedListener(textWatcher)
+                quantity = validateQuantity()
+                updateSideControls()
+                doAfterQuantityChange(quantity)
+                etQuantity.addTextChangedListener(textWatcher)
             }
         }
     }
@@ -134,12 +145,6 @@ class QuantityPicker @JvmOverloads constructor(
             quantity--
         }
     }
-
-    fun doAfterQuantityChange(action: (quantity: Int) -> Unit) =
-        editText.doAfterTextChanged {
-            action(validateQuantity())
-            updateSideControls()
-        }
 
     inner class InputFilterMinMax(private val min: Int, private val max: Int) : InputFilter {
 
