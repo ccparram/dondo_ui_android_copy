@@ -3,17 +3,21 @@ package com.dondo.ui.quantitypicker
 import android.content.Context
 import android.text.InputFilter
 import android.text.Spanned
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import com.dondo.ui.R
 import com.dondo.ui.databinding.LayoutQuantityPickerBinding
+import com.dondo.ui.utils.Constants.EMPTY
 import com.dondo.ui.utils.extensions.getColorCompat
 import com.dondo.ui.utils.extensions.getStringCompat
 import com.dondo.ui.utils.extensions.setSafeOnClickListener
-import timber.log.Timber
 
 class QuantityPicker @JvmOverloads constructor(
     context: Context,
@@ -21,7 +25,17 @@ class QuantityPicker @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
-    private var maxValue: Int = 99999999
+    private var editText: AppCompatEditText
+
+    var doAfterQuantityChange: (quantity: Int) -> Unit = {}
+    var textWatcher: TextWatcher? = null
+
+    // 5000 is the max stock defined in BE
+    var maxValue: Int = 5000
+        set(value) {
+            field = value
+            updateRangeFilter()
+        }
     private var minValue: Int = 0
     private var oldQuantity: Int = 0
 
@@ -29,22 +43,21 @@ class QuantityPicker @JvmOverloads constructor(
         LayoutQuantityPickerBinding.inflate(LayoutInflater.from(context), this, true)
     }
 
-    private var onQuantityChange: (quantity: Int) -> Unit = { _: Int -> }
-
-    var quantity: Int = minValue
+    var quantity = minValue
         set(value) {
             field = value
-            binding.etQuantity.setText(value.toString())
+            editText.setText(value.toString())
+            editText.setSelection(editText.text.toString().length)
             updateSideControls()
         }
 
     init {
         rootView
+        editText = binding.etQuantity
+        quantity = minValue
         setupAttrs(attrs)
         setListeners()
-        binding.etQuantity.setText(quantity.toString())
-        binding.etQuantity.filters +=
-            arrayOf(InputFilter.LengthFilter(maxValue.toString().length), InputFilterMinMax(minValue, maxValue))
+        updateRangeFilter()
     }
 
     override fun getRootView(): LinearLayoutCompat = binding.llQuantityPickerContainer
@@ -54,7 +67,7 @@ class QuantityPicker @JvmOverloads constructor(
             try {
                 getResourceId(R.styleable.QuantityPicker_quantityPickerNextFocusDown, 0).let { nextId ->
                     if (nextId != 0) {
-                        binding.etQuantity.nextFocusDownId = nextId
+                        editText.nextFocusDownId = nextId
                     }
                 }
             } finally {
@@ -86,72 +99,50 @@ class QuantityPicker @JvmOverloads constructor(
      */
     private fun updateSideControls() {
         with(binding) {
-            ivNegative.setColorFilter(getColorFromCondition(quantity == minValue))
-            ivPositive.setColorFilter(getColorFromCondition(quantity == maxValue))
+            ivNegative.setStateFromCondition(quantity == minValue, ::subtract)
+            ivPositive.setStateFromCondition(quantity == maxValue, ::add)
         }
+    }
+
+    private fun updateRangeFilter() {
+        editText.filters = arrayOf(InputFilterMinMax(minValue, maxValue))
     }
 
     private fun setListeners() {
         with(binding) {
-            ivNegative.setSafeOnClickListener {
-                subtract()
+            etQuantity.setOnFocusChangeListener { _, hasFocus ->
+                ivNegative.isVisible = !hasFocus
+                ivPositive.isVisible = !hasFocus
             }
 
-            ivPositive.setSafeOnClickListener {
-                add()
-            }
-
-            with(etQuantity) {
-                setOnFocusChangeListener { _, hasFocus ->
-                    if (hasFocus) {
-                        oldQuantity = text.toString().toInt()
-                        setSelection(length())
-                    } else {
-                        validate()
-                    }
-
-                    ivNegative.isVisible = !hasFocus
-                    ivPositive.isVisible = !hasFocus
-                }
+            textWatcher = etQuantity.doAfterTextChanged {
+                etQuantity.removeTextChangedListener(textWatcher)
+                quantity = validateQuantity()
+                updateSideControls()
+                doAfterQuantityChange(quantity)
+                etQuantity.addTextChangedListener(textWatcher)
             }
         }
     }
 
-    private fun validate() {
-        val newCount = if (!binding.etQuantity.text.isNullOrEmpty()) {
-            val value = binding.etQuantity.text.toString().toInt()
-
-            if (value in minValue..maxValue) value else oldQuantity
-        } else minValue
-
-        quantity = newCount
-        onQuantityChange(quantity)
-    }
+    private fun validateQuantity(): Int =
+        if (editText.text.isNullOrEmpty()) {
+            minValue
+        } else {
+            val newCount = editText.text.toString().toInt()
+            if (newCount in minValue..maxValue) newCount else oldQuantity
+        }
 
     private fun add() {
         if (quantity != maxValue) {
             quantity++
         }
-
-        onQuantityChange(quantity)
     }
 
     private fun subtract() {
         if (quantity != minValue) {
             quantity--
         }
-
-        onQuantityChange(quantity)
-    }
-
-    fun doAfterQuantityChange(action: (quantity: Int) -> Unit) {
-        onQuantityChange = action
-    }
-
-    private fun getColorFromCondition(condition: Boolean): Int {
-        val color = if (condition) R.color.quantity_picker_action_disabled else R.color.quantity_picker_action_enable
-
-        return getColorCompat(color)
     }
 
     inner class InputFilterMinMax(private val min: Int, private val max: Int) : InputFilter {
@@ -163,14 +154,30 @@ class QuantityPicker @JvmOverloads constructor(
             dest: Spanned,
             dstart: Int,
             dend: Int
-        ): CharSequence {
+        ): CharSequence? =
             try {
-                val input = (dest.toString() + source.toString()).toInt()
-                if (input in min..max) return source.toString()
+                val input = Integer.parseInt(dest.toString() + source.toString())
+                if (isInRange(min, max, input)) {
+                    null
+                } else {
+                    EMPTY
+                }
             } catch (t: NumberFormatException) {
-                Timber.e(t)
+                EMPTY
             }
-            return minValue.toString()
+
+        private fun isInRange(a: Int, b: Int, c: Int): Boolean = if (b > a) c in a..b else c in b..a
+    }
+
+    private fun AppCompatImageView.setStateFromCondition(condition: Boolean, action: () -> Unit) {
+        with(this) {
+            if (condition) {
+                setColorFilter(getColorCompat(R.color.quantity_picker_action_disabled))
+                setSafeOnClickListener { }
+            } else {
+                setColorFilter(getColorCompat(R.color.quantity_picker_action_enable))
+                setSafeOnClickListener { action() }
+            }
         }
     }
 }
