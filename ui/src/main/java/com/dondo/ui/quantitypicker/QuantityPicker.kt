@@ -44,7 +44,6 @@ class QuantityPicker @JvmOverloads constructor(
     }
 
     var quantity = minValue
-        get() = editText.toIntOrMin()
         set(value) {
             field = value
             editText.setText(value.toString())
@@ -181,11 +180,4 @@ class QuantityPicker @JvmOverloads constructor(
             }
         }
     }
-
-    private fun AppCompatEditText.toIntOrMin() =
-        try {
-            this.text.toString().toInt()
-        } catch (t: NumberFormatException) {
-            minValue
-        }
 }
