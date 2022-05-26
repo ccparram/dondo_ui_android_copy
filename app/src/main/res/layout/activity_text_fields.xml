@@ -40,7 +40,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:hint="multiline text field"
-        app:placeholder="Enter some text"
-        app:minLines="4"
-        android:inputType="textMultiLine" />
+        app:placeholder="Enter some text" />
 </androidx.appcompat.widget.LinearLayoutCompat>
