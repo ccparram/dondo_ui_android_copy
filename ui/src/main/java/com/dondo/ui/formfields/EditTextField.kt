@@ -37,7 +37,6 @@ class EditTextField @JvmOverloads constructor(
     var isRequired = false
     var minLength = 0
     private var minLines = 1
-    private var maxLines = 1
     var editText: AppCompatEditText = binding.etContent
 
     var inputType = TYPE_CLASS_TEXT
@@ -95,11 +94,9 @@ class EditTextField @JvmOverloads constructor(
                 minLength = getInt(R.styleable.EditTextField_minLength, minLength)
                 maxLength = getInt(R.styleable.EditTextField_maxLength, maxLength)
                 minLines = getInt(R.styleable.EditTextField_minLines, minLines)
-                maxLines = getInt(R.styleable.EditTextField_minLines, maxLines)
                 inputType = getInt(R.styleable.EditTextField_android_inputType, TYPE_CLASS_TEXT)
 
                 editText.minLines = minLines
-                editText.maxLines = maxLines
                 recycle()
             }
         }
