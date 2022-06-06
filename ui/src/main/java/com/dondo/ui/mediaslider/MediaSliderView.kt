@@ -77,4 +77,8 @@ class MediaSliderView @JvmOverloads constructor(
     fun setElements(elements: List<String>) {
         adapter.setElements(elements)
     }
+
+    fun stopPlayer() {
+        adapter.stopPlayer()
+    }
 }

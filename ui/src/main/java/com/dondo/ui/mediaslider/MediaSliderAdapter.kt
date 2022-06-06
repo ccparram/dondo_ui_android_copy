@@ -1,5 +1,6 @@
 package com.dondo.ui.mediaslider
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -58,6 +59,7 @@ class MediaSliderAdapter(private val isZoomEnable: Boolean) : RecyclerView
         return elements.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setElements(elements: List<String>) {
         this.elements.clear()
         this.elements.addAll(elements)
