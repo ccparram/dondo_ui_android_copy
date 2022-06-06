@@ -53,4 +53,9 @@ class MediaSliderDemoActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onPause() {
+        binding.cvSlider.stopPlayer()
+        super.onPause()
+    }
 }
