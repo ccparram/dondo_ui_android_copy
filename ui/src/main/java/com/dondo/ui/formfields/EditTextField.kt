@@ -77,6 +77,12 @@ class EditTextField @JvmOverloads constructor(
         get() = editText.text.toString()
         set(value) = editText.setText(value)
 
+    override fun isEnabled(): Boolean = editText.isEnabled
+
+    override fun setEnabled(enabled: Boolean) {
+        editText.isEnabled = enabled
+    }
+
     init {
         rootView
         setupAttrs(attrs)
@@ -88,6 +94,7 @@ class EditTextField @JvmOverloads constructor(
     private fun setupAttrs(attrs: AttributeSet?) {
         attrs.let {
             context.theme.obtainStyledAttributes(it, R.styleable.EditTextField, 0, 0).apply {
+                isEnabled = getBoolean(R.styleable.EditTextField_android_enabled, true)
                 isRequired = getBoolean(R.styleable.EditTextField_is_required, false)
                 title = getString(R.styleable.EditTextField_hint) ?: EMPTY
                 placeholder = getString(R.styleable.EditTextField_placeholder) ?: EMPTY

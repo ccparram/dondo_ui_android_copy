@@ -8,6 +8,7 @@
     </declare-styleable>
 
     <declare-styleable name="EditTextField">
+        <attr name="android:enabled" />
         <attr name="android:inputType" />
         <attr name="android:imeOptions" />
         <attr name="is_required" />
