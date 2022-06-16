@@ -22,6 +22,9 @@
 
     <color name="main_primary">#77F16D</color>
 
+    <!--Edit Text Field-->
+    <color name="text_field_disable">#3A3A3A</color>
+
     <!--  Text -->
     <color name="text_high_emphasis">#E7E7E7</color>
     <color name="text_mid_emphasis">#9D9D9D</color>

@@ -41,4 +41,11 @@
         android:layout_marginTop="10dp"
         app:hint="multiline text field"
         app:placeholder="Enter some text" />
+
+    <com.dondo.ui.formfields.EditTextField
+        android:id="@+id/etDisable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:hint="Disabled TextField"/>
 </androidx.appcompat.widget.LinearLayoutCompat>
