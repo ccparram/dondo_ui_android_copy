@@ -96,7 +96,7 @@ class EditTextField @JvmOverloads constructor(
             context.theme.obtainStyledAttributes(it, R.styleable.EditTextField, 0, 0).apply {
                 isEnabled = getBoolean(R.styleable.EditTextField_android_enabled, true)
                 isRequired = getBoolean(R.styleable.EditTextField_is_required, false)
-                title = getString(R.styleable.EditTextField_hint) ?: EMPTY
+                title = getString(R.styleable.EditTextField_title) ?: EMPTY
                 placeholder = getString(R.styleable.EditTextField_placeholder) ?: EMPTY
                 minLength = getInt(R.styleable.EditTextField_minLength, minLength)
                 maxLength = getInt(R.styleable.EditTextField_maxLength, maxLength)
