@@ -18,7 +18,7 @@ class TextFieldsActivity : AppCompatActivity() {
 
         with(binding) {
             etMultiline.inputType = TYPE_CLASS_TEXT or TYPE_TEXT_FLAG_CAP_SENTENCES or TYPE_TEXT_FLAG_MULTI_LINE
-            etDisable.text = "This is a field disable"
+            etDisable.text = "This is a disabled field"
             etDisable.isEnabled = false
         }
     }
