@@ -7,14 +7,14 @@ import android.webkit.URLUtil
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import coil.ImageLoader
+import coil.disk.DiskCache
 import coil.load
+import coil.memory.MemoryCache
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 import coil.transform.Transformation
-import coil.util.CoilUtils
 import com.dondo.ui.utils.ImageTransformation
 import kotlinx.coroutines.Dispatchers
-import okhttp3.OkHttpClient
 import java.io.File
 
 fun ImageView.loadImage(
@@ -103,12 +103,17 @@ object CustomImageLoader {
         } else {
             instance = ImageLoader.Builder(context)
                 .dispatcher(Dispatchers.Default)
-                .okHttpClient {
-                    OkHttpClient.Builder()
-                        .cache(CoilUtils.createDefaultCache(context))
+                .memoryCache {
+                    MemoryCache.Builder(context)
+                        .maxSizePercent(0.3)
                         .build()
                 }
-                .availableMemoryPercentage(0.30)
+                .diskCache {
+                    DiskCache.Builder()
+                        .directory(context.cacheDir.resolve("image_cache"))
+                        .maxSizePercent(0.3)
+                        .build()
+                }
                 .crossfade(true)
                 .build()
 
