@@ -58,12 +58,12 @@ class ButtonView @JvmOverloads constructor(
                 isEnabled = false
             }
             SECONDARY_ENABLED -> {
-                this.background = getDrawableCompat(R.drawable.bg_button_secondary_enabled)
+                background = getDrawableCompat(R.drawable.bg_button_secondary_enabled)
                 setTextColor(getColorCompat(R.color.text_button_secondary_enabled))
                 isEnabled = true
             }
             SECONDARY_DISABLED -> {
-                this.background = getDrawableCompat(R.drawable.bg_button_secondary_disabled)
+                background = getDrawableCompat(R.drawable.bg_button_secondary_disabled)
                 setTextColor(getColorCompat(R.color.text_button_disabled))
                 isEnabled = false
             }

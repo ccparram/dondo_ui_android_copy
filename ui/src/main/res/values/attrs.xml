@@ -9,8 +9,6 @@
             <enum name="primary_disable" value="1" />
             <enum name="secondary_enable" value="2" />
             <enum name="secondary_disable" value="3" />
-            <enum name="disable_clickable" value="4" />
-            <enum name="tertiary" value="5" />
         </attr>
     </declare-styleable>
 
