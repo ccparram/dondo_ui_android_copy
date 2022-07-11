@@ -5,15 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:theme="@style/AppTheme">
+    android:theme="@style/AppTheme"
+    tools:ignore="HardcodedText">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/TextAppearance.AppCompat.Inverse"
         android:layout_marginBottom="16dp"
-        android:text="Not verified"
-        tools:ignore="HardcodedText" />
+        android:text="Not verified" />
 
     <com.dondo.ui.mediaslider.ProfilePictureView
         android:id="@+id/profilePicture1"
@@ -26,8 +26,7 @@
         android:layout_height="wrap_content"
         style="@style/TextAppearance.AppCompat.Inverse"
         android:layout_marginBottom="16dp"
-        android:text="Verified"
-        tools:ignore="HardcodedText" />
+        android:text="Verified" />
 
     <com.dondo.ui.mediaslider.ProfilePictureView
         android:id="@+id/profilePicture2"
@@ -40,8 +39,7 @@
         android:layout_height="wrap_content"
         style="@style/TextAppearance.AppCompat.Inverse"
         android:layout_marginBottom="16dp"
-        android:text="Wrong url"
-        tools:ignore="HardcodedText" />
+        android:text="Wrong url"/>
 
     <com.dondo.ui.mediaslider.ProfilePictureView
         android:id="@+id/profilePicture3"
@@ -54,8 +52,7 @@
         android:layout_height="wrap_content"
         style="@style/TextAppearance.AppCompat.Inverse"
         android:layout_marginBottom="16dp"
-        android:text="Without setting an url"
-        tools:ignore="HardcodedText" />
+        android:text="Without setting an url" />
 
     <com.dondo.ui.mediaslider.ProfilePictureView
         android:id="@+id/profilePicture4"

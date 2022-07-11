@@ -3,14 +3,14 @@
     <item android:state_enabled="true" android:state_focused="true">
         <shape android:shape="rectangle">
             <solid android:color="@color/elevation_2" />
-            <corners android:radius="@dimen/radius_10" />
+            <corners android:radius="@dimen/edittext_radius" />
             <stroke android:width="@dimen/corners_width" android:color="@color/green" />
         </shape>
     </item>
     <item android:state_enabled="true">
         <shape android:shape="rectangle">
             <solid android:color="@color/elevation_2" />
-            <corners android:radius="@dimen/radius_10" />
+            <corners android:radius="@dimen/edittext_radius" />
         </shape>
     </item>
 </selector>

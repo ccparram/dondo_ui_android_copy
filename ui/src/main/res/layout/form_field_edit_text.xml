@@ -22,7 +22,7 @@
             style="@style/TextAppearance.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/text_field_states"
+            android:background="@drawable/edit_text_states"
             android:gravity="top|left"
             android:minHeight="@dimen/edittext_min_height"
             android:paddingHorizontal="@dimen/padding_normal_100"
