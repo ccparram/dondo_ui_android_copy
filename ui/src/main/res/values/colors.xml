@@ -35,6 +35,10 @@
     <color name="text_button_secondary_enabled">@color/main_primary</color>
     <color name="text_button_disabled">@color/text_disabled</color>
 
+    <!-- Button -->
+    <color name="button_bg_primary_enabled">@color/main_primary</color>
+    <color name="button_bg_primary_disabled">@color/elevation_1</color>
+
     <!--  Quantity picker  -->
     <color name="quantity_picker_action_disabled">@color/text_disabled</color>
     <color name="quantity_picker_action_enable">@color/greyPale</color>
