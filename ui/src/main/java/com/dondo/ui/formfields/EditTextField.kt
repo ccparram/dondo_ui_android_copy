@@ -8,6 +8,7 @@ import android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 import android.util.AttributeSet
 import android.util.Patterns.EMAIL_ADDRESS
 import android.view.LayoutInflater
+import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -78,9 +79,18 @@ class EditTextField @JvmOverloads constructor(
         set(value) = editText.setText(value)
 
     override fun isEnabled(): Boolean = editText.isEnabled
+    override fun isClickable(): Boolean = editText.isClickable
 
     override fun setEnabled(enabled: Boolean) {
         editText.isEnabled = enabled
+    }
+
+    override fun setClickable(clickable: Boolean) {
+        editText.isClickable = clickable
+    }
+
+    override fun setFocusable(focusable: Boolean) {
+        editText.isFocusable = focusable
     }
 
     init {
@@ -95,6 +105,8 @@ class EditTextField @JvmOverloads constructor(
         attrs.let {
             context.theme.obtainStyledAttributes(it, R.styleable.EditTextField, 0, 0).apply {
                 isEnabled = getBoolean(R.styleable.EditTextField_android_enabled, true)
+                isClickable = getBoolean(R.styleable.EditTextField_android_clickable, true)
+                isFocusable = getBoolean(R.styleable.EditTextField_android_focusable, true)
                 isRequired = getBoolean(R.styleable.EditTextField_is_required, false)
                 title = getString(R.styleable.EditTextField_title) ?: EMPTY
                 placeholder = getString(R.styleable.EditTextField_placeholder) ?: EMPTY
@@ -118,6 +130,8 @@ class EditTextField @JvmOverloads constructor(
         }
 
     fun doAfterTextChanged(action: (text: String) -> Unit) = editText.doAfterTextChanged { action(it.toString()) }
+
+    fun setOnClickListener(action: (view: View) -> Unit) = editText.setOnClickListener { action(it) }
 
     fun showErrorField(errorMessage: String) {
         showError(errorMessage)

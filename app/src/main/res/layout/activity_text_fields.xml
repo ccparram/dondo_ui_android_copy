@@ -1,51 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:theme="@style/AppTheme">
+    android:layout_width="match_parent"
+    android:overScrollMode="never">
 
-    <com.dondo.ui.formfields.EditTextField
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="With placeholder"
-        app:placeholder="Enter some text" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:theme="@style/AppTheme">
 
-    <com.dondo.ui.formfields.EditTextField
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:title="Without placeholder" />
+        <com.dondo.ui.formfields.EditTextField
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:placeholder="Enter some text"
+            app:title="With placeholder" />
 
-    <com.dondo.ui.formfields.EditTextField
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:title="Required with min length = 8"
-        app:is_required="true"
-        app:minLength="8" />
+        <com.dondo.ui.formfields.EditTextField
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:title="Without placeholder" />
 
-    <com.dondo.ui.formfields.EditTextField
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:title="Required with max length = 4"
-        app:maxLength="4" />
+        <com.dondo.ui.formfields.EditTextField
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:is_required="true"
+            app:minLength="8"
+            app:title="Required with min length = 8" />
 
-    <com.dondo.ui.formfields.EditTextField
-        android:id="@+id/etMultiline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:title="Multiline text field"
-        app:placeholder="Enter some text" />
+        <com.dondo.ui.formfields.EditTextField
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:maxLength="4"
+            app:title="Required with max length = 4" />
 
-    <com.dondo.ui.formfields.EditTextField
-        android:id="@+id/etDisable"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:title="Disabled TextField" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <com.dondo.ui.formfields.EditTextField
+            android:id="@+id/etMultiline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:placeholder="Enter some text"
+            app:title="Multiline text field" />
+
+        <com.dondo.ui.formfields.EditTextField
+            android:id="@+id/etDisable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:title="Disabled TextField" />
+
+        <com.dondo.ui.formfields.EditTextField
+            android:id="@+id/etClickable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="false"
+            app:title="Clickable TextField" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

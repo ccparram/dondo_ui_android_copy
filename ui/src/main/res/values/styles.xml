@@ -36,7 +36,6 @@
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/inter_semi_bold</item>
         <item name="android:includeFontPadding">false</item>
-        <item name="android:gravity">center</item>
     </style>
 
     <style name="TextAppearance.Posting.Label" parent="TextAppearance.H3">
