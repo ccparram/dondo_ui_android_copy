@@ -5,7 +5,7 @@ android {
     compileSdkVersion 31
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 31
     }
 
@@ -32,8 +32,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    implementation 'com.google.android.exoplayer:exoplayer:2.17.1'
-    implementation 'io.coil-kt:coil:1.4.0'
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.0'
+    implementation 'io.coil-kt:coil:2.1.0'
 
     // Development
     api 'com.orhanobut:logger:2.2.0'

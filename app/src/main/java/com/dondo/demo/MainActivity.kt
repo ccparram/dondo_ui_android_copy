@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dondo.demo.databinding.ActivityMainBinding
+import com.dondo.demo.examples.ButtonViewActivity
 import com.dondo.demo.examples.MediaSliderDemoActivity
 import com.dondo.demo.examples.ProfilePictureActivity
 import com.dondo.demo.examples.QuantityPickerActivity
@@ -23,12 +24,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListeners() {
         with(binding) {
-            btMediaSlider.setOnClickListener {
-                startActivity(Intent(this@MainActivity, MediaSliderDemoActivity::class.java))
-            }
 
             btTextFields.setOnClickListener {
                 startActivity(Intent(this@MainActivity, TextFieldsActivity::class.java))
+            }
+
+            btButton.setOnClickListener {
+                startActivity(Intent(this@MainActivity, ButtonViewActivity::class.java))
             }
 
             btProfilePicture.setOnClickListener {
@@ -37,6 +39,10 @@ class MainActivity : AppCompatActivity() {
 
             btQuantityPicker.setOnClickListener {
                 startActivity(Intent(this@MainActivity, QuantityPickerActivity::class.java))
+            }
+
+            btMediaSlider.setOnClickListener {
+                startActivity(Intent(this@MainActivity, MediaSliderDemoActivity::class.java))
             }
         }
     }

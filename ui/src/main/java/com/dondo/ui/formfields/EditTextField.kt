@@ -158,7 +158,7 @@ class EditTextField @JvmOverloads constructor(
     private fun hideError() {
         with(binding) {
             tvErrorLabel.isVisible = false
-            editText.background = getDrawableCompat(R.drawable.text_field_states)
+            editText.background = getDrawableCompat(R.drawable.edit_text_states)
         }
     }
 

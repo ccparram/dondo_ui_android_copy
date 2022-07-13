@@ -3,6 +3,15 @@
     <attr name="is_required" format="boolean" />
     <attr name="title" format="string" />
 
+    <declare-styleable name="ButtonView">
+        <attr name="state" format="enum">
+            <enum name="primary_enable" value="0" />
+            <enum name="primary_disable" value="1" />
+            <enum name="secondary_enable" value="2" />
+            <enum name="secondary_disable" value="3" />
+        </attr>
+    </declare-styleable>
+
     <declare-styleable name="MediaSliderView">
         <attr name="double_tap_zoom_enabled" format="boolean" />
     </declare-styleable>

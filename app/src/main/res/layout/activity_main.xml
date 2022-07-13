@@ -4,7 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btTextFields"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_50"
+        android:text="TextFields" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_50"
+        android:text="Buttons" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btProfilePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_50"
+        android:text="Profile Picture" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btMediaSlider"
@@ -15,26 +37,9 @@
         tools:ignore="HardcodedText" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btTextFields"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal_50"
-        android:text="TextFields"
-        tools:ignore="HardcodedText" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btProfilePicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal_50"
-        android:text="Profile Picture"
-        tools:ignore="HardcodedText" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btQuantityPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_normal_50"
-        android:text="Quantity picker"
-        tools:ignore="HardcodedText" />
+        android:text="Quantity picker" />
 </androidx.appcompat.widget.LinearLayoutCompat>
