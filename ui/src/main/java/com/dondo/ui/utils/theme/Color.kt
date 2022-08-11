@@ -9,7 +9,8 @@ data class DondoColors(
     val backgroundDisabled: Color,
     val textPrimary: Color,
     val textSecondary: Color,
-    val textDisabled: Color
+    val textDisabled: Color,
+    val error: Color
 )
 
 internal val dondoDefaultLightColors =
@@ -20,7 +21,8 @@ internal val dondoDefaultLightColors =
         backgroundDisabled = Color(0xFFE7E7E7),
         textPrimary = Color(0xFFFFFFFF),
         textSecondary = Color(0xFF262626),
-        textDisabled = Color(0xFF9D9D9D)
+        textDisabled = Color(0xFF9D9D9D),
+        error = Color(0xFFFA4D56),
     )
 
 val Blank = Color(0xFFFFFFFF)

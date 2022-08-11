@@ -28,9 +28,9 @@ import com.dondo.ui.utils.theme.Shapes
 
 @Composable
 fun DondoEditTextField(
+    modifier: Modifier = Modifier,
     title: String = EMPTY,
     placeHolder: String = EMPTY,
-    modifier: Modifier = Modifier,
     isMultiline: Boolean = false,
     enabled: Boolean = true,
     isRequired: Boolean = false,
@@ -53,9 +53,9 @@ fun DondoEditTextField(
             .defaultMinSize(minHeight = 60.dp)
             .padding(horizontal = 18.dp, vertical = 16.dp)
             .border(
-                width = if(isFocused.value) 2.dp else 1.dp,
+                width = if(enabled) 2.dp else 1.dp,
                 shape = Shapes.medium,
-                color = if(enabled) DondoThemeContainer.colors.textSecondary else DondoThemeContainer.colors.backgroundDisabled
+                color = textFieldBorderColor(enabled, isRequired)
             )
             .onFocusChanged {
                 isFocused.value = it.isFocused
@@ -80,6 +80,16 @@ fun DondoEditTextField(
         }
     )
 }
+
+@Composable
+private fun textFieldBorderColor(enabled: Boolean, isRequired: Boolean) =
+    with(DondoThemeContainer.colors) {
+        when {
+            !enabled -> backgroundDisabled
+            !isRequired -> error
+            else -> textSecondary
+        }
+    }
 
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
