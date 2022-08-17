@@ -33,7 +33,7 @@ fun DondoEditTextField(
     placeHolder: String = EMPTY,
     isMultiline: Boolean = false,
     enabled: Boolean = true,
-    isRequired: Boolean = false,
+    isRequired: Boolean = true,
     onValueChange: (String) -> Unit
 ) {
     var value by remember { mutableStateOf(TextFieldValue(EMPTY)) }
@@ -49,11 +49,10 @@ fun DondoEditTextField(
         },
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.White)
             .defaultMinSize(minHeight = 60.dp)
-            .padding(horizontal = 18.dp, vertical = 16.dp)
+            .background(Color.White)
             .border(
-                width = if(enabled) 2.dp else 1.dp,
+                width = if(isFocused.value) 2.dp else 1.dp,
                 shape = Shapes.medium,
                 color = textFieldBorderColor(enabled, isRequired)
             )
@@ -66,7 +65,7 @@ fun DondoEditTextField(
             },
         decorationBox = { innerTextField ->
             Column(
-                modifier = modifier.padding(16.dp),
+                modifier = Modifier.padding(16.dp),
                 content = {
                     Text(text = title, style = DondoThemeContainer.typography.body2)
                     Spacer(modifier = Modifier.size(2.dp))
@@ -93,7 +92,7 @@ private fun textFieldBorderColor(enabled: Boolean, isRequired: Boolean) =
 
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
-private fun editTextFieldPreview() {
+private fun EditTextFieldPreview() {
     PreviewContainer {
         DondoEditTextField(title = "Título del artículo", placeHolder = "Agrega un título a tu artículo") {
 
@@ -103,7 +102,7 @@ private fun editTextFieldPreview() {
 
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
-private fun editTextFieldDisabledPreview() {
+private fun EditTextFieldDisabledPreview() {
     PreviewContainer {
         DondoEditTextField(
             title = "Título del artículo",

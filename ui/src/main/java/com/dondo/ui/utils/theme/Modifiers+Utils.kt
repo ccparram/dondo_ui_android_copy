@@ -3,12 +3,15 @@ package com.dondo.ui.utils.theme
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -34,11 +37,11 @@ fun Modifier.conditional(
         else -> this
     }
 
-fun Modifier.darkBorder(): Modifier =
+fun Modifier.darkBorder(width: Dp = 1.dp, shape: CornerBasedShape = Shapes.large, color: Color = Gray3): Modifier =
     border(
-        width = 1.dp,
-        shape = Shapes.large,
-        color = Gray3
+        width = width,
+        shape = shape,
+        color = color
     )
 
 fun Modifier.volumeBorder(): Modifier =
