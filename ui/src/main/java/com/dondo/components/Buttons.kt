@@ -53,7 +53,7 @@ fun DondoButton(
                 ifTrue = { wrapContentWidth() },
                 ifFalse = { fillMaxWidth() },
             )
-            .height(36.dp)
+            .height(40.dp)
             .conditional(
                 condition = buttonType == Secondary,
                 ifTrue = { volumeBorder() },
@@ -120,8 +120,8 @@ private fun buttonColors(buttonType: ButtonType) = when (buttonType) {
     Borderless -> ButtonDefaults.buttonColors(
         backgroundColor = styleColor(buttonType),
         contentColor = styleColor(buttonType),
-        disabledBackgroundColor = DondoThemeContainer.colors.backgroundDisabled,
-        disabledContentColor = DondoThemeContainer.colors.textDisabled
+        disabledBackgroundColor = Transparent,
+        disabledContentColor = Transparent
     )
 }
 
@@ -160,9 +160,7 @@ private fun PrimaryButtonPreview() {
 @Composable
 private fun SecondaryButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Secondary button", buttonType = Secondary) {
-
-        }
+        DondoButton(text = "Secondary button", buttonType = Secondary) { }
     }
 }
 
@@ -170,9 +168,7 @@ private fun SecondaryButtonPreview() {
 @Composable
 private fun DisabledButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Disabled button", enabled = false) {
-
-        }
+        DondoButton(text = "Disabled button", enabled = false) { }
     }
 }
 
@@ -180,9 +176,7 @@ private fun DisabledButtonPreview() {
 @Composable
 private fun BorderLessButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Borderless button", buttonType = Borderless) {
-
-        }
+        DondoButton(text = "Borderless button", buttonType = Borderless) { }
     }
 }
 

@@ -11,24 +11,23 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dondo.ui.utils.Constants.EMPTY
 import com.dondo.ui.utils.theme.DondoThemeContainer
+import com.dondo.ui.utils.theme.Gray2
 import com.dondo.ui.utils.theme.PreviewContainer
 import com.dondo.ui.utils.theme.Shapes
 
 @Composable
 fun DondoEditTextField(
     modifier: Modifier = Modifier,
+    text: String = EMPTY,
     title: String = EMPTY,
     placeHolder: String = EMPTY,
     isMultiline: Boolean = false,
@@ -36,16 +35,14 @@ fun DondoEditTextField(
     isRequired: Boolean = true,
     onValueChange: (String) -> Unit
 ) {
-    var value by remember { mutableStateOf(TextFieldValue(EMPTY)) }
     val isFocused = remember { mutableStateOf(false) }
 
     BasicTextField(
-        value = value,
+        value = text,
         singleLine = !isMultiline,
         enabled = enabled,
         onValueChange = {
-            value = it
-            onValueChange(it.text)
+            onValueChange(it)
         },
         modifier = modifier
             .fillMaxWidth()
@@ -67,10 +64,10 @@ fun DondoEditTextField(
             Column(
                 modifier = Modifier.padding(16.dp),
                 content = {
-                    Text(text = title, style = DondoThemeContainer.typography.body2)
+                    Text(text = title, style = DondoThemeContainer.typography.body2.copy(color = Gray2))
                     Spacer(modifier = Modifier.size(2.dp))
-                    if (value.text.isEmpty() && !isFocused.value) {
-                        Text(text = placeHolder, style = DondoThemeContainer.typography.body2)
+                    if (text.isEmpty() && !isFocused.value) {
+                        Text(text = placeHolder, style = DondoThemeContainer.typography.body2.copy(color = Gray2))
                     } else {
                         innerTextField()
                     }
