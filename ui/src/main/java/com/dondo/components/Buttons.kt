@@ -1,10 +1,8 @@
 package com.dondo.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -41,7 +39,7 @@ fun DondoButton(
                 ifTrue = { wrapContentWidth() },
                 ifFalse = { fillMaxWidth() },
             )
-            .height(36.dp)
+            .height(40.dp)
             .conditional(
                 condition = buttonType == Secondary,
                 ifTrue = { volumeBorder() },
@@ -108,8 +106,8 @@ private fun buttonColors(buttonType: ButtonType) = when (buttonType) {
     Borderless -> ButtonDefaults.buttonColors(
         backgroundColor = styleColor(buttonType),
         contentColor = styleColor(buttonType),
-        disabledBackgroundColor = DondoThemeContainer.colors.backgroundDisabled,
-        disabledContentColor = DondoThemeContainer.colors.textDisabled
+        disabledBackgroundColor = Transparent,
+        disabledContentColor = Transparent
     )
 }
 
@@ -136,7 +134,7 @@ enum class ButtonType { Primary, Secondary, Borderless }
 
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
-private fun primaryButtonPreview() {
+private fun PrimaryButtonPreview() {
     PreviewContainer {
         DondoButton(text = "Primary button") {
 
@@ -148,9 +146,7 @@ private fun primaryButtonPreview() {
 @Composable
 private fun SecondaryButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Secondary button", buttonType = Secondary) {
-
-        }
+        DondoButton(text = "Secondary button", buttonType = Secondary) { }
     }
 }
 
@@ -158,9 +154,7 @@ private fun SecondaryButtonPreview() {
 @Composable
 private fun DisabledButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Disabled button", enabled = false) {
-
-        }
+        DondoButton(text = "Disabled button", enabled = false) { }
     }
 }
 
@@ -168,9 +162,7 @@ private fun DisabledButtonPreview() {
 @Composable
 private fun BorderLessButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Borderless button", buttonType = Borderless) {
-
-        }
+        DondoButton(text = "Borderless button", buttonType = Borderless) { }
     }
 }
 
