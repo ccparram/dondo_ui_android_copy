@@ -34,4 +34,4 @@ val Info = Color(0xFF4589FF)
 val Success = Color(0xFF77F16D)
 val Warning = Color(0xFFFA4D56)
 val Caution = Color(0xFFFDE744)
-val redError = Warning
+val Error = Warning
