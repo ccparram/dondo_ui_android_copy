@@ -3,6 +3,8 @@ package com.dondo.components
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.interaction.Interaction
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -17,6 +19,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +39,8 @@ import com.dondo.ui.utils.theme.DondoThemeContainer
 import com.dondo.ui.utils.theme.PreviewContainer
 import com.dondo.ui.utils.theme.conditional
 import com.dondo.ui.utils.theme.volumeBorder
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun DondoButton(
@@ -55,7 +60,7 @@ fun DondoButton(
             )
             .height(40.dp)
             .conditional(
-                condition = buttonType == Secondary,
+                condition = enabled && buttonType == Secondary,
                 ifTrue = { volumeBorder() },
             ),
         onClick = onClick,
@@ -63,7 +68,8 @@ fun DondoButton(
         enabled = enabled,
         shape = RoundedCornerShape(24.dp),
         elevation = buttonElevation(buttonType),
-        border = borderStroke(buttonType, enabled)
+        border = borderStroke(buttonType, enabled),
+        interactionSource = if(buttonType == Borderless) NoRippleInteractionSource() else remember { MutableInteractionSource() },
     ) {
         ButtonContent(text, buttonType, enabled)
     }
@@ -106,32 +112,24 @@ private fun buttonElevation(buttonType: ButtonType) =
 @Composable
 private fun buttonColors(buttonType: ButtonType) = when (buttonType) {
     Primary -> ButtonDefaults.buttonColors(
-        backgroundColor = styleColor(buttonType),
+        backgroundColor = DondoThemeContainer.colors.textSecondary,
         contentColor = DondoThemeContainer.colors.textPrimary,
         disabledBackgroundColor = DondoThemeContainer.colors.backgroundDisabled,
         disabledContentColor = DondoThemeContainer.colors.textDisabled
     )
     Secondary -> ButtonDefaults.buttonColors(
-        backgroundColor = styleColor(buttonType),
-        contentColor = styleColor(buttonType),
+        backgroundColor = DondoThemeContainer.colors.primary,
+        contentColor = DondoThemeContainer.colors.primary,
         disabledBackgroundColor = DondoThemeContainer.colors.backgroundDisabled,
         disabledContentColor = DondoThemeContainer.colors.textDisabled
     )
     Borderless -> ButtonDefaults.buttonColors(
-        backgroundColor = styleColor(buttonType),
-        contentColor = styleColor(buttonType),
+        backgroundColor = Transparent,
+        contentColor = Transparent,
         disabledBackgroundColor = Transparent,
         disabledContentColor = Transparent
     )
 }
-
-@Composable
-private fun styleColor(buttonType: ButtonType) =
-    when (buttonType) {
-        Primary -> DondoThemeContainer.colors.textSecondary
-        Secondary -> DondoThemeContainer.colors.primary
-        Borderless -> Transparent
-    }
 
 @Composable
 private fun styleTextColor(buttonType: ButtonType, enabled: Boolean) = if(!enabled) {
@@ -164,7 +162,7 @@ private fun SecondaryButtonPreview() {
     }
 }
 
-@Preview
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
 private fun DisabledButtonPreview() {
     PreviewContainer {
@@ -263,9 +261,7 @@ private fun MenuButtonContent(
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
 private fun MenuButtonPreview() {
-    Row(
-        modifier = Modifier.padding(16.dp)
-    ) {
+    PreviewContainer {
         MenuButton(
             text = "\uD83D\uDCE7 Menu button",
             count = 2302,
@@ -276,36 +272,13 @@ private fun MenuButtonPreview() {
     }
 }
 
-@Composable
-fun ChipButton(
-    modifier: Modifier = Modifier,
-    text: String,
-    enabled: Boolean = true,
-    onClick: () -> Unit,
-) {
-    Button(
-        modifier = modifier,
-        onClick = onClick,
-        enabled = enabled,
-        shape = RoundedCornerShape(10.dp),
-        border = BorderStroke(1.dp, Color.Black),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
-    ) {
-        Text(
-            textAlign = TextAlign.Start,
-            text = "#$text",
-            color = Color.Black
-        )
-    }
-}
+// Used to remove ripple effect on Button when is ButtonType.Borderless
+// Reference: https://semicolonspace.com/jetpack-compose-disable-ripple-effect/
+class NoRippleInteractionSource : MutableInteractionSource {
 
-@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
-@Composable
-private fun ChipButtonPreview() {
-    Row(
-        modifier = Modifier.padding(16.dp)
-    ) {
-        ChipButton(text = "Fotografía") {
-        }
-    }
+    override val interactions: Flow<Interaction> = emptyFlow()
+
+    override suspend fun emit(interaction: Interaction) {}
+
+    override fun tryEmit(interaction: Interaction) = true
 }
