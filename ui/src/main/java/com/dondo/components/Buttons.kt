@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Badge
 import androidx.compose.material.Button
@@ -30,7 +29,6 @@ import androidx.compose.ui.text.style.TextAlign.Companion.Center
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dondo.components.ButtonType.Borderless
 import com.dondo.components.ButtonType.Primary
 import com.dondo.components.ButtonType.Secondary
 import com.dondo.ui.R
@@ -47,16 +45,11 @@ fun DondoButton(
     text: String,
     buttonType: ButtonType = Primary,
     enabled: Boolean = true,
-    isFromDualButton: Boolean = false,
     onClick: () -> Unit,
 ) {
     Button(
         modifier = modifier
-            .conditional(
-                condition = isFromDualButton,
-                ifTrue = { wrapContentWidth() },
-                ifFalse = { fillMaxWidth() },
-            )
+            .fillMaxWidth()
             .height(40.dp)
             .conditional(
                 condition = enabled && buttonType == Secondary,
@@ -68,7 +61,7 @@ fun DondoButton(
         shape = RoundedCornerShape(24.dp),
         elevation = buttonElevation(buttonType),
         border = borderStroke(buttonType, enabled),
-        interactionSource = if (buttonType == Borderless) NoRippleInteractionSource() else remember { MutableInteractionSource() },
+        interactionSource = remember { MutableInteractionSource() },
     ) {
         ButtonContent(text, buttonType, enabled)
     }
@@ -77,7 +70,7 @@ fun DondoButton(
 @Composable
 private fun borderStroke(buttonType: ButtonType, enabled: Boolean) =
     when (buttonType) {
-        Primary, Borderless -> null
+        Primary -> null
         Secondary -> BorderStroke(
             1.dp,
             if (enabled) DondoThemeContainer.colors.textSecondary else Transparent
@@ -104,7 +97,7 @@ private fun ButtonContent(
 private fun buttonElevation(buttonType: ButtonType) =
     when (buttonType) {
         Primary -> ButtonDefaults.elevation(defaultElevation = 4.dp)
-        Secondary, Borderless -> ButtonDefaults.elevation(defaultElevation = 0.dp)
+        Secondary -> ButtonDefaults.elevation(defaultElevation = 0.dp)
     }
 
 
@@ -122,12 +115,6 @@ private fun buttonColors(buttonType: ButtonType) = when (buttonType) {
         disabledBackgroundColor = DondoThemeContainer.colors.backgroundDisabled,
         disabledContentColor = DondoThemeContainer.colors.textDisabled
     )
-    Borderless -> ButtonDefaults.buttonColors(
-        backgroundColor = Transparent,
-        contentColor = Transparent,
-        disabledBackgroundColor = Transparent,
-        disabledContentColor = Transparent
-    )
 }
 
 @Composable
@@ -137,11 +124,10 @@ private fun styleTextColor(buttonType: ButtonType, enabled: Boolean) = if (!enab
     when (buttonType) {
         Primary -> DondoThemeContainer.colors.primary
         Secondary -> DondoThemeContainer.colors.textSecondary
-        Borderless -> DondoThemeContainer.colors.textSecondary
     }
 }
 
-enum class ButtonType { Primary, Secondary, Borderless }
+enum class ButtonType { Primary, Secondary }
 
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
@@ -169,14 +155,6 @@ private fun DisabledButtonPreview() {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
-@Composable
-private fun BorderLessButtonPreview() {
-    PreviewContainer {
-        DondoButton(text = "Borderless button", buttonType = Borderless) { }
-    }
-}
-
 @Composable
 fun MenuButton(
     modifier: Modifier = Modifier,
@@ -198,8 +176,7 @@ fun MenuButton(
         border = borderStroke(buttonType = Secondary, enabled = enabled)
     ) {
         Row(
-            modifier = modifier
-                .fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -213,8 +190,7 @@ fun MenuButton(
                 )
                 if (!count.isNullOrBlank()) {
                     Text(
-                        modifier = modifier
-                            .padding(start = 4.dp),
+                        modifier = modifier.padding(start = 4.dp),
                         textAlign = TextAlign.Start,
                         color = Color(0xFF7D7D7D),
                         text = "($count)"
@@ -226,12 +202,11 @@ fun MenuButton(
             ) {
                 if (!notificationBadgeText.isNullOrBlank()) {
                     Badge(
-                        modifier = modifier
-                            .padding(end = 12.dp),
+                        modifier = modifier.padding(end = 12.dp),
                     ) {
                         Text(
                             maxLines = 1,
-                            text = notificationBadgeText ?: ""
+                            text = notificationBadgeText
                         )
                     }
                 }

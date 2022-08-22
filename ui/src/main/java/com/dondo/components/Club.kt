@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Badge
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -15,6 +16,7 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Alignment.Companion.Start
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,18 +35,26 @@ fun ClubElement(
     accessType: String,
     itemsCount: String,
     amIMember: Boolean,
-    unseenNotifications: String,
+    unseenNotifications: String? = null,
     onClick: (Int) -> Unit
 ) {
-    Row {
-        Box {
+    Row(
+        modifier = modifier
+            .wrapContentWidth()
+    ) {
+        Box(
+            modifier = modifier.align(CenterVertically)
+        ) {
             CircleShapedPicture(profilePicture = profilePicture)
-            Badge(
-                modifier = modifier.align(BottomEnd)
-            ) {
-                Text(
-                    maxLines = 1, text = unseenNotifications // How to hide this
-                )
+            if (!unseenNotifications.isNullOrBlank()) {
+                Badge(
+                    modifier = modifier.align(BottomEnd)
+                ) {
+                    Text(
+                        maxLines = 1,
+                        text = unseenNotifications
+                    )
+                }
             }
         }
         Column(
@@ -56,9 +66,10 @@ fun ClubElement(
             Text(
                 modifier = modifier,
                 text = name,
+                fontSize = 14.sp,
                 maxLines = 2,
                 overflow = Ellipsis,
-                )
+            )
             ClubInfo(
                 modifier = modifier.padding(top = 8.dp),
                 membersCount = membersCount,
@@ -71,7 +82,7 @@ fun ClubElement(
                 modifier = modifier
                     .padding(start = 16.dp)
                     .align(CenterVertically),
-                text = "Únete",
+                text = stringResource(id = R.string.join),
                 buttonType = ButtonType.Primary
             ) {
                 onClick(clubId)
@@ -82,15 +93,31 @@ fun ClubElement(
 
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
-private fun ClubElementPreview() {
+private fun ClubElementBeingMemberPreview() {
     PreviewContainer {
-        ClubElement(name = "Hellfire, club de solo trueque Norte de Bogota",
+        ClubElement(name = "Hellfire, club de solo trueque Norte de Bogota y más alrededores",
             profilePicture = "https://picsum.photos/300/300",
             clubId = 2,
             membersCount = "23,434",
             accessType = "Privado",
             itemsCount = "43,344",
             amIMember = true,
+            unseenNotifications = "+9",
+            onClick = {}
+        )
+    }
+}
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun ClubElementNotBeingMemberPreview() {
+    PreviewContainer {
+        ClubElement(name = "Hellfire, club de solo trueque Norte de Bogota y más alrededores",
+            profilePicture = "https://picsum.photos/300/300",
+            clubId = 2,
+            membersCount = "23,434",
+            accessType = "Privado",
+            itemsCount = "43,344",
+            amIMember = false,
             unseenNotifications = "+9",
             onClick = {}
         )
@@ -115,8 +142,7 @@ fun ClubInfo(
             tint = Gray2
         )
         Text(
-            modifier = modifier
-                .padding(start = 8.dp),
+            modifier = modifier.padding(start = 8.dp),
             text = "($membersCount)",
             color = Gray2,
             fontSize = 12.sp
@@ -132,8 +158,7 @@ fun ClubInfo(
             tint = Gray2
         )
         Text(
-            modifier = modifier
-                .padding(start = 8.dp),
+            modifier = modifier.padding(start = 8.dp),
             text = accessType,
             color = Gray2,
             fontSize = 12.sp
@@ -149,8 +174,7 @@ fun ClubInfo(
             tint = Gray2
         )
         Text(
-            modifier = modifier
-                .padding(start = 8.dp),
+            modifier = modifier.padding(start = 8.dp),
             text = "($itemsCount)",
             color = Gray2,
             fontSize = 12.sp
