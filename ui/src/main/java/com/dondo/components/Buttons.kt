@@ -181,7 +181,7 @@ private fun BorderLessButtonPreview() {
 fun MenuButton(
     modifier: Modifier = Modifier,
     text: String,
-    count: Int? = null,
+    count: String? = null,
     notificationBadgeText: String? = null,
     enabled: Boolean = true,
     onClick: () -> Unit,
@@ -211,25 +211,29 @@ fun MenuButton(
                     overflow = Ellipsis,
                     maxLines = 1,
                 )
-                Text(
-                    modifier = modifier
-                        .padding(start = 4.dp),
-                    textAlign = TextAlign.Start,
-                    color = Color(0xFF7D7D7D),
-                    text = "($count)"
-                )
+                if (!count.isNullOrBlank()) {
+                    Text(
+                        modifier = modifier
+                            .padding(start = 4.dp),
+                        textAlign = TextAlign.Start,
+                        color = Color(0xFF7D7D7D),
+                        text = "($count)"
+                    )
+                }
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Badge(
-                    modifier = modifier
-                        .padding(end = 12.dp),
-                ) {
-                    Text(
-                        maxLines = 1,
-                        text = notificationBadgeText ?: ""
-                    )
+                if (!notificationBadgeText.isNullOrBlank()) {
+                    Badge(
+                        modifier = modifier
+                            .padding(end = 12.dp),
+                    ) {
+                        Text(
+                            maxLines = 1,
+                            text = notificationBadgeText ?: ""
+                        )
+                    }
                 }
                 Image(
                     modifier = modifier
@@ -246,11 +250,24 @@ fun MenuButton(
 
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
-private fun MenuButtonPreview() {
+private fun MenuButtonSimplePreview() {
     PreviewContainer {
         MenuButton(
             text = "\uD83D\uDCE7 Menu button",
-            count = 2302,
+            count = null,
+            notificationBadgeText = ""
+        ) {
+        }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun MenuButtonComplexPreview() {
+    PreviewContainer {
+        MenuButton(
+            text = "\uD83D\uDCE7 Menu button",
+            count = "232,434",
             notificationBadgeText = "+9"
         ) {
         }
