@@ -1,13 +1,12 @@
 package com.dondo.components
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -69,7 +68,7 @@ fun DondoButton(
         shape = RoundedCornerShape(24.dp),
         elevation = buttonElevation(buttonType),
         border = borderStroke(buttonType, enabled),
-        interactionSource = if(buttonType == Borderless) NoRippleInteractionSource() else remember { MutableInteractionSource() },
+        interactionSource = if (buttonType == Borderless) NoRippleInteractionSource() else remember { MutableInteractionSource() },
     ) {
         ButtonContent(text, buttonType, enabled)
     }
@@ -132,7 +131,7 @@ private fun buttonColors(buttonType: ButtonType) = when (buttonType) {
 }
 
 @Composable
-private fun styleTextColor(buttonType: ButtonType, enabled: Boolean) = if(!enabled) {
+private fun styleTextColor(buttonType: ButtonType, enabled: Boolean) = if (!enabled) {
     DondoThemeContainer.colors.textDisabled
 } else {
     when (buttonType) {
@@ -184,7 +183,6 @@ fun MenuButton(
     text: String,
     count: Int? = null,
     notificationBadgeText: String? = null,
-    @DrawableRes rightIcon: Int,
     enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
@@ -199,62 +197,50 @@ fun MenuButton(
         elevation = buttonElevation(buttonType = Secondary),
         border = borderStroke(buttonType = Secondary, enabled = enabled)
     ) {
-        MenuButtonContent(
-            text = text,
-            count = count,
-            notificationBadgeText = notificationBadgeText,
-            rightIcon = rightIcon,
-            enabled = enabled
-        )
-    }
-}
-
-@Composable
-private fun MenuButtonContent(
-    text: String,
-    count: Int?,
-    notificationBadgeText: String?,
-    @DrawableRes rightIcon: Int,
-    enabled: Boolean
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-            .padding(horizontal = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Text(
-            text = text,
-            color = styleTextColor(Secondary, enabled),
-            style = DondoThemeContainer.typography.button,
-            overflow = Ellipsis,
-            maxLines = 1,
-        )
-        Text(
-            textAlign = TextAlign.Start,
-            color = Color(0xFF7D7D7D),
-            text = "($count)"
-        )
-        Badge(
-            modifier = Modifier
-                .wrapContentWidth()
-                .weight(2f),
+        Row(
+            modifier = modifier
+                .fillMaxSize(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(
-                maxLines = 1,
-                text = notificationBadgeText ?: ""
-            )
+            Row {
+                Text(
+                    text = text,
+                    color = styleTextColor(Secondary, enabled),
+                    style = DondoThemeContainer.typography.button,
+                    overflow = Ellipsis,
+                    maxLines = 1,
+                )
+                Text(
+                    modifier = modifier
+                        .padding(start = 4.dp),
+                    textAlign = TextAlign.Start,
+                    color = Color(0xFF7D7D7D),
+                    text = "($count)"
+                )
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Badge(
+                    modifier = modifier
+                        .padding(end = 12.dp),
+                ) {
+                    Text(
+                        maxLines = 1,
+                        text = notificationBadgeText ?: ""
+                    )
+                }
+                Image(
+                    modifier = modifier
+                        .height(8.dp)
+                        .width(8.dp),
+                    painter = painterResource(id = R.drawable.ic_next),
+                    contentDescription = null,
+                    colorFilter = ColorFilter.tint(color = Color(0xFF1C1C1C))
+                )
+            }
         }
-        Image(
-            modifier = Modifier
-                .height(8.dp)
-                .width(5.dp),
-            painter = painterResource(id = rightIcon),
-            contentDescription = "next",
-            colorFilter = ColorFilter.tint(color = Color(0xFF1C1C1C))
-        )
     }
 }
 
@@ -265,8 +251,7 @@ private fun MenuButtonPreview() {
         MenuButton(
             text = "\uD83D\uDCE7 Menu button",
             count = 2302,
-            notificationBadgeText = "+9",
-            rightIcon = R.drawable.ic_quantity_minus
+            notificationBadgeText = "+9"
         ) {
         }
     }
