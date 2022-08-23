@@ -48,9 +48,8 @@ fun Modifier.volumeBorder(): Modifier =
     drawBehind {
         drawRoundRect(
             color = Gray3,
-            cornerRadius = CornerRadius(60f,60f),
-            topLeft = Offset(15f,20f),
-            size = Size(size.width-4f, size.height-10f),
+            cornerRadius = CornerRadius(60f, 60f),
+            topLeft = Offset(15f, 20f),
+            size = Size(size.width - 4f, size.height - 10f),
         )
     }.padding(bottom = 1.dp, end = 2.dp)
-
