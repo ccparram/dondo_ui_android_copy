@@ -7,6 +7,8 @@ import android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Column
+import com.dondo.components.DondoEditTextField
 import com.dondo.demo.databinding.ActivityTextFieldsBinding
 import com.dondo.ui.utils.extensions.viewBinding
 
@@ -26,6 +28,12 @@ class TextFieldsActivity : AppCompatActivity() {
 
             etClickable.setOnClickListener {
                 Toast.makeText(this@TextFieldsActivity, "TextField Clicked!", LENGTH_SHORT).show()
+            }
+
+            composeView.setContent {
+                Column {
+                    DondoEditTextField(title = "Título del artículo", placeHolder = "Agrega un título a tu artículo") {}
+                }
             }
         }
     }

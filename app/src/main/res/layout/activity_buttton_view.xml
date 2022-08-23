@@ -1,54 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:ignore="HardcodedText"
-    android:theme="@style/AppTheme">
+    android:layout_width="match_parent"
+    android:overScrollMode="never">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Inverse"
-        android:text="Primary" />
-
-    <com.dondo.ui.button.ButtonView
-        android:id="@+id/btPrimaryEnabled"
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enabled"
-        android:layout_marginTop="@dimen/margin_normal_100"
-        app:state="primary_enable" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:ignore="HardcodedText"
+        android:theme="@style/AppTheme">
 
-    <com.dondo.ui.button.ButtonView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Disabled"
-        android:layout_marginTop="@dimen/margin_normal_100"
-        app:state="primary_disable" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Inverse"
+            android:text="Primary" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Inverse"
-        android:layout_marginTop="@dimen/margin_normal_200"
-        android:text="Secondary" />
+        <com.dondo.ui.button.ButtonView
+            android:id="@+id/btPrimaryEnabled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enabled"
+            android:layout_marginTop="@dimen/margin_normal_100"
+            app:state="primary_enable" />
 
-    <com.dondo.ui.button.ButtonView
-        android:id="@+id/btSecondaryEnabled"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enabled"
-        android:layout_marginTop="@dimen/margin_normal_100"
-        app:state="secondary_enable" />
+        <com.dondo.ui.button.ButtonView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Disabled"
+            android:layout_marginTop="@dimen/margin_normal_100"
+            app:state="primary_disable" />
 
-    <com.dondo.ui.button.ButtonView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Disabled"
-        android:layout_marginTop="@dimen/margin_normal_100"
-        app:state="secondary_disable" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Inverse"
+            android:layout_marginTop="@dimen/margin_normal_200"
+            android:text="Secondary" />
+
+        <com.dondo.ui.button.ButtonView
+            android:id="@+id/btSecondaryEnabled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enabled"
+            android:layout_marginTop="@dimen/margin_normal_100"
+            app:state="secondary_enable" />
+
+        <com.dondo.ui.button.ButtonView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Disabled"
+            android:layout_marginTop="@dimen/margin_normal_100"
+            app:state="secondary_disable" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            style="@style/TextAppearance.AppCompat.Inverse"
+            android:text="Compose" />
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/composeView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

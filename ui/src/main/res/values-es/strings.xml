@@ -4,4 +4,8 @@
     <string name="error_not_match_regex">Contiene caracteres no permitidos</string>
 
     <string name="quantity_picker_label">¿Qué cantidad tienes disponible?</string>
+
+    <string name="follow">Seguir</string>
+    <string name="following">Siguiendo</string>
+    <string name="join">Únete</string>
 </resources>

@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListeners() {
         with(binding) {
-
             btTextFields.setOnClickListener {
                 startActivity(Intent(this@MainActivity, TextFieldsActivity::class.java))
             }
