@@ -3,9 +3,6 @@ package com.dondo.demo
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Column
-import com.dondo.components.DondoButton
-import com.dondo.components.DondoEditTextField
 import com.dondo.demo.databinding.ActivityMainBinding
 import com.dondo.demo.examples.ButtonViewActivity
 import com.dondo.demo.examples.MediaSliderDemoActivity
@@ -27,17 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListeners() {
         with(binding) {
-            composeView.setContent {
-            Column() {
-                DondoEditTextField(title = "Título del artículo", placeHolder = "Agrega un título a tu artículo") {
-
-                }
-                DondoButton(text = "esto es un boton") {
-
-                }
-            }
-        }
-
             btTextFields.setOnClickListener {
                 startActivity(Intent(this@MainActivity, TextFieldsActivity::class.java))
             }

@@ -100,7 +100,6 @@ private fun buttonElevation(buttonType: ButtonType) =
         Secondary -> ButtonDefaults.elevation(defaultElevation = 0.dp)
     }
 
-
 @Composable
 private fun buttonColors(buttonType: ButtonType) = when (buttonType) {
     Primary -> ButtonDefaults.buttonColors(
@@ -134,7 +133,6 @@ enum class ButtonType { Primary, Secondary }
 private fun PrimaryButtonPreview() {
     PreviewContainer {
         DondoButton(text = "Primary button") {
-
         }
     }
 }

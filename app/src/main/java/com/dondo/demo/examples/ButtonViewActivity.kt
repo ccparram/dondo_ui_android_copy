@@ -3,6 +3,8 @@ package com.dondo.demo.examples
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Column
+import com.dondo.components.DondoButton
 import com.dondo.demo.databinding.ActivityButttonViewBinding
 import com.dondo.ui.utils.extensions.viewBinding
 
@@ -21,6 +23,12 @@ class ButtonViewActivity : AppCompatActivity() {
 
             btSecondaryEnabled.setOnClickListener {
                 Toast.makeText(this@ButtonViewActivity, "Click secondary enabled", Toast.LENGTH_SHORT).show()
+            }
+
+            composeView.setContent {
+                Column {
+                    DondoButton(text = "esto es un boton") {}
+                }
             }
         }
     }

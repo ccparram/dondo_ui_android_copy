@@ -95,7 +95,8 @@ fun ClubElement(
 @Composable
 private fun ClubElementBeingMemberPreview() {
     PreviewContainer {
-        ClubElement(name = "Hellfire, club de solo trueque Norte de Bogota y más alrededores",
+        ClubElement(
+            name = "Hellfire, club de solo trueque Norte de Bogota y más alrededores",
             profilePicture = "https://picsum.photos/300/300",
             clubId = 2,
             membersCount = "23,434",
@@ -111,7 +112,8 @@ private fun ClubElementBeingMemberPreview() {
 @Composable
 private fun ClubElementNotBeingMemberPreview() {
     PreviewContainer {
-        ClubElement(name = "Hellfire, club de solo trueque Norte de Bogota y más alrededores",
+        ClubElement(
+            name = "Hellfire, club de solo trueque Norte de Bogota y más alrededores",
             profilePicture = "https://picsum.photos/300/300",
             clubId = 2,
             membersCount = "23,434",

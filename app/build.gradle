@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.dondo.ui"
         minSdkVersion 23
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
     }
@@ -16,11 +16,6 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     composeOptions {
@@ -50,7 +45,7 @@ dependencies {
     implementation 'androidx.compose.animation:animation:1.2.1'
     implementation 'androidx.compose.ui:ui-tooling:1.2.1'
 
+
     // UI Tests
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.2.1'
-    implementation "com.google.accompanist:accompanist-appcompat-theme:0.25.1"
+    implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
 }
