@@ -47,5 +47,5 @@ dependencies {
 
 
     // UI Tests
-    implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
+    implementation "com.google.accompanist:accompanist-appcompat-theme:0.25.1"
 }
