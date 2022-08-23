@@ -5,4 +5,8 @@
     <string name="error_not_match_regex">Some of these characters are not permitted</string>
 
     <string name="quantity_picker_label">How many do you have in stock?</string>
+
+    <string name="follow">Follow</string>
+    <string name="following">Following</string>
+    <string name="join">Join</string>
 </resources>
