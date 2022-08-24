@@ -113,7 +113,6 @@ private fun textFieldBorderColor(showError: Boolean, enabled: Boolean, isRequire
 private fun EditTextFieldPreview() {
     PreviewContainer {
         DondoEditTextField(title = "Título del artículo", placeHolder = "Agrega un título a tu artículo") {
-
         }
     }
 }
@@ -127,7 +126,6 @@ private fun EditTextFieldDisabledPreview() {
             placeHolder = "Agrega un título a tu artículo",
             enabled = false
         ) {
-
         }
     }
 }
@@ -142,7 +140,6 @@ private fun EditTextFieldWithErrorPreview() {
             showError = true,
             errorMessage = "This is an error",
         ) {
-
         }
     }
 }

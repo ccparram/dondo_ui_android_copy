@@ -7,11 +7,6 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText">
 
-    <androidx.compose.ui.platform.ComposeView
-        android:id="@+id/composeView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btTextFields"
         android:layout_width="wrap_content"

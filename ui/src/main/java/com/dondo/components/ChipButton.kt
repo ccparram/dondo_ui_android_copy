@@ -24,18 +24,18 @@ fun ChipButton(
     Surface(
         modifier = modifier.padding(4.dp)
             .darkBorder(shape = RoundedCornerShape(10.dp)),
-        elevation = if(isSelected) 10.dp else 0.dp,
+        elevation = if (isSelected) 10.dp else 0.dp,
         shape = RoundedCornerShape(10.dp),
         color = chipStyleColor(isSelected)
     ) {
         Row(
             modifier = Modifier
-            .toggleable(
-                value = isSelected,
-                onValueChange = {
-                    onSelectionChanged(text)
-                }
-            )
+                .toggleable(
+                    value = isSelected,
+                    onValueChange = {
+                        onSelectionChanged(text)
+                    }
+                )
         ) {
             Text(
                 text = "#$text",

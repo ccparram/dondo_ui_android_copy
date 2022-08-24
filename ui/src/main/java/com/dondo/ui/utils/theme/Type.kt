@@ -19,7 +19,7 @@ val Inter = FontFamily(
 
 // Set of Material typography styles to start with
 val dondoTypography = Typography(
-    defaultFontFamily= Inter,
+    defaultFontFamily = Inter,
     h1 = TextStyle(
         fontWeight = Bold,
         fontSize = 28.sp
@@ -57,7 +57,7 @@ val dondoTypography = Typography(
 val Typography.body3: TextStyle
     @Composable
     get() {
-        return  TextStyle(
+        return TextStyle(
             fontWeight = Normal,
             fontSize = 18.sp
         )
@@ -66,7 +66,7 @@ val Typography.body3: TextStyle
 val Typography.body4: TextStyle
     @Composable
     get() {
-        return  TextStyle(
+        return TextStyle(
             fontWeight = Normal,
             fontSize = 16.sp
         )
@@ -75,10 +75,8 @@ val Typography.body4: TextStyle
 val Typography.body5: TextStyle
     @Composable
     get() {
-        return  TextStyle(
+        return TextStyle(
             fontWeight = Normal,
             fontSize = 12.sp
         )
     }
-
-

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         minSdkVersion 23
-        targetSdkVersion 31
+        targetSdkVersion 32
     }
 
     buildTypes {
@@ -14,11 +14,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     composeOptions {
@@ -54,7 +49,7 @@ dependencies {
 
     // UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.2.1'
-    implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
+    implementation "com.google.accompanist:accompanist-appcompat-theme:0.25.1"
 
     // Development
     api 'com.orhanobut:logger:2.2.0'
