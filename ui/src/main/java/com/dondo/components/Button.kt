@@ -165,7 +165,13 @@ fun MenuButton(
     Button(
         modifier = modifier
             .height(60.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .volumeBorder(
+                offsetX = 5f,
+                offsetY = 15f,
+                cornerRadiusX = 30f,
+                cornerRadiusY = 30f
+            ),
         onClick = onClick,
         colors = buttonColors(buttonType = Secondary),
         enabled = enabled,

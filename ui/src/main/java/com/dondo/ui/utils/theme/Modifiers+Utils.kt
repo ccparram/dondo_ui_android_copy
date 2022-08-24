@@ -48,12 +48,14 @@ fun Modifier.volumeBorder(
     offsetX: Float = 15f,
     offsetY: Float = 20f,
     sizeWidthToSubstract: Float = 4f,
-    sizeHeightToSubstract: Float = 10f
+    sizeHeightToSubstract: Float = 10f,
+    cornerRadiusX: Float = 60f,
+    cornerRadiusY: Float = 60f
 ): Modifier =
     drawBehind {
         drawRoundRect(
             color = Gray3,
-            cornerRadius = CornerRadius(60f, 60f),
+            cornerRadius = CornerRadius(cornerRadiusX, cornerRadiusY),
             topLeft = Offset(offsetX, offsetY),
             size = Size(size.width - sizeWidthToSubstract, size.height - sizeHeightToSubstract),
         )
