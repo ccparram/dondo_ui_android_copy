@@ -22,7 +22,7 @@
 
     <color name="main_primary">#77F16D</color>
 
-    <!--Edit Text Field-->
+    <!-- Edit Text Field -->
     <color name="text_field_disable">#3A3A3A</color>
 
     <!--  Text -->
@@ -39,7 +39,7 @@
     <color name="button_bg_primary_enabled">@color/main_primary</color>
     <color name="button_bg_primary_disabled">@color/elevation_1</color>
 
-    <!--  Quantity picker  -->
+    <!-- Quantity picker -->
     <color name="quantity_picker_action_disabled">@color/text_disabled</color>
     <color name="quantity_picker_action_enable">@color/greyPale</color>
 </resources>

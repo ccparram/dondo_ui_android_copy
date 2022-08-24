@@ -56,14 +56,16 @@ fun UserElement(
                         overflow = Ellipsis,
                     )
                     Text(
-                        modifier = modifier.padding(start = 8.dp),
+                        modifier = modifier
+                            .padding(start = 8.dp),
                         text = reviewInfo,
                         maxLines = 1,
                         color = Gray2
                     )
                 }
                 Text(
-                    modifier = modifier.padding(top = 8.dp),
+                    modifier = modifier
+                        .padding(top = 8.dp),
                     text = lastSeen,
                     maxLines = 1,
                     color = Gray2,

@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -16,13 +17,13 @@ import com.dondo.ui.utils.theme.PreviewContainer
 
 @Composable
 fun CircleShapedPicture(
-    modifier: Modifier = Modifier,
-    profilePicture: String
+    profilePicture: String,
+    size: Dp = 50.dp
 ) {
     AsyncImage(
-        modifier = modifier
-            .height(50.dp)
-            .width(50.dp)
+        modifier = Modifier
+            .height(size)
+            .width(size)
             .clip(CircleShape),
         model = ImageRequest.Builder(LocalContext.current)
             .data(profilePicture)
@@ -34,11 +35,10 @@ fun CircleShapedPicture(
 
 @Composable
 fun RoundedCornerPicture(
-    modifier: Modifier = Modifier,
     profilePicture: String
 ) {
     AsyncImage(
-        modifier = modifier
+        modifier = Modifier
             .height(40.dp)
             .width(40.dp)
             .clip(RoundedCornerShape(10.dp)),
@@ -54,7 +54,7 @@ fun RoundedCornerPicture(
 @Composable
 private fun CircleShapedPicturePreview() {
     PreviewContainer {
-        CircleShapedPicture(Modifier, "https://picsum.photos/300/300")
+        CircleShapedPicture("https://picsum.photos/300/300")
     }
 }
 
@@ -62,6 +62,6 @@ private fun CircleShapedPicturePreview() {
 @Composable
 private fun RoundedCornerPicturePreview() {
     PreviewContainer {
-        RoundedCornerPicture(Modifier, "https://picsum.photos/300/300")
+        RoundedCornerPicture("https://picsum.photos/300/300")
     }
 }

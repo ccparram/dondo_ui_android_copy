@@ -1,23 +1,26 @@
 package com.dondo.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.interaction.Interaction
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Badge
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,8 +39,6 @@ import com.dondo.ui.utils.theme.DondoThemeContainer
 import com.dondo.ui.utils.theme.PreviewContainer
 import com.dondo.ui.utils.theme.conditional
 import com.dondo.ui.utils.theme.volumeBorder
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun DondoButton(
@@ -61,7 +62,6 @@ fun DondoButton(
         shape = RoundedCornerShape(24.dp),
         elevation = buttonElevation(buttonType),
         border = borderStroke(buttonType, enabled),
-        interactionSource = remember { MutableInteractionSource() },
     ) {
         ButtonContent(text, buttonType, enabled)
     }
@@ -176,7 +176,8 @@ fun MenuButton(
         border = borderStroke(buttonType = Secondary, enabled = enabled)
     ) {
         Row(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -190,7 +191,8 @@ fun MenuButton(
                 )
                 if (!count.isNullOrBlank()) {
                     Text(
-                        modifier = modifier.padding(start = 4.dp),
+                        modifier = modifier
+                            .padding(start = 4.dp),
                         textAlign = TextAlign.Start,
                         color = Color(0xFF7D7D7D),
                         text = "($count)"
@@ -202,7 +204,8 @@ fun MenuButton(
             ) {
                 if (!notificationBadgeText.isNullOrBlank()) {
                     Badge(
-                        modifier = modifier.padding(end = 12.dp),
+                        modifier = modifier
+                            .padding(end = 12.dp),
                     ) {
                         Text(
                             maxLines = 1,
@@ -249,13 +252,39 @@ private fun MenuButtonComplexPreview() {
     }
 }
 
-// Used to remove ripple effect on Button when is ButtonType.Borderless
-// Reference: https://semicolonspace.com/jetpack-compose-disable-ripple-effect/
-class NoRippleInteractionSource : MutableInteractionSource {
+@Composable
+fun RoundedIconButton(
+    modifier: Modifier,
+    @DrawableRes icon: Int,
+    onClick: () -> Unit
+) {
+    OutlinedButton(
+        modifier = modifier
+            .size(40.dp)
+            .volumeBorder(
+                offsetX = 3f,
+                offsetY = 10f,
+                sizeWidthToSubstract = 6f,
+                sizeHeightToSubstract = 6f
+            ),
+        onClick = { onClick() },
+        shape = CircleShape,
+        border = BorderStroke(1.dp, Color.Black),
+        contentPadding = PaddingValues(0.dp),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
+    ) {
+        Icon(painter = painterResource(id = icon), contentDescription = null)
+    }
+}
 
-    override val interactions: Flow<Interaction> = emptyFlow()
-
-    override suspend fun emit(interaction: Interaction) {}
-
-    override fun tryEmit(interaction: Interaction) = true
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun RoundedIconButtonPreview() {
+    PreviewContainer {
+        RoundedIconButton(
+            modifier = Modifier,
+            icon = R.drawable.ic_share
+        ) {
+        }
+    }
 }

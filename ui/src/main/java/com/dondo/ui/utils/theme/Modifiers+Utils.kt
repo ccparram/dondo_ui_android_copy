@@ -44,13 +44,17 @@ fun Modifier.darkBorder(width: Dp = 1.dp, shape: CornerBasedShape = Shapes.large
         color = color
     )
 
-fun Modifier.volumeBorder(): Modifier =
+fun Modifier.volumeBorder(
+    offsetX: Float = 15f,
+    offsetY: Float = 20f,
+    sizeWidthToSubstract: Float = 4f,
+    sizeHeightToSubstract: Float = 10f
+): Modifier =
     drawBehind {
         drawRoundRect(
             color = Gray3,
-            cornerRadius = CornerRadius(60f,60f),
-            topLeft = Offset(15f,20f),
-            size = Size(size.width-4f, size.height-10f),
+            cornerRadius = CornerRadius(60f, 60f),
+            topLeft = Offset(offsetX, offsetY),
+            size = Size(size.width - sizeWidthToSubstract, size.height - sizeHeightToSubstract),
         )
     }.padding(bottom = 1.dp, end = 2.dp)
-

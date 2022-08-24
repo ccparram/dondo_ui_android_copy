@@ -1,14 +1,17 @@
 package com.dondo.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Badge
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.BottomEnd
@@ -17,6 +20,7 @@ import androidx.compose.ui.Alignment.Companion.Start
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,12 +47,14 @@ fun ClubElement(
             .wrapContentWidth()
     ) {
         Box(
-            modifier = modifier.align(CenterVertically)
+            modifier = modifier
+                .align(CenterVertically)
         ) {
             CircleShapedPicture(profilePicture = profilePicture)
             if (!unseenNotifications.isNullOrBlank()) {
                 Badge(
-                    modifier = modifier.align(BottomEnd)
+                    modifier = modifier
+                        .align(BottomEnd)
                 ) {
                     Text(
                         maxLines = 1,
@@ -71,7 +77,8 @@ fun ClubElement(
                 overflow = Ellipsis,
             )
             ClubInfo(
-                modifier = modifier.padding(top = 8.dp),
+                modifier = modifier
+                    .padding(top = 8.dp),
                 membersCount = membersCount,
                 accessType = accessType,
                 itemsCount = itemsCount
@@ -107,6 +114,7 @@ private fun ClubElementBeingMemberPreview() {
         )
     }
 }
+
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
 private fun ClubElementNotBeingMemberPreview() {
@@ -190,6 +198,89 @@ private fun ClubInfoPreview() {
             membersCount = "123,234",
             itemsCount = "432,344",
             accessType = "Público"
+        )
+    }
+}
+
+@Composable
+fun ProfileToolbar(
+    modifier: Modifier,
+    clubId: Int,
+    profilePicture: String,
+    name: String,
+    onBackPress: () -> Unit,
+    firstAction: Pair<Int, (Int) -> Unit>?,
+    secondAction: Pair<Int, (Int) -> Unit>?,
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = CenterVertically
+    ) {
+        Row(
+            modifier = modifier
+                .wrapContentWidth(),
+            verticalAlignment = CenterVertically
+        ) {
+            IconButton(
+                onClick = { onBackPress() }
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_back),
+                    contentDescription = null,
+                    tint = Gray2
+                )
+            }
+            CircleShapedPicture(
+                profilePicture = profilePicture,
+                size = 40.dp
+            )
+            Text(
+                modifier = modifier
+                    .padding(14.dp),
+                textAlign = TextAlign.Start,
+                text = name,
+                maxLines = 1,
+                overflow = Ellipsis
+            )
+        }
+        Row {
+            firstAction?.let {
+                // first is the icon
+                // second is the onClick
+                RoundedIconButton(
+                    modifier = modifier,
+                    icon = firstAction.first
+                ) {
+                    firstAction.second(clubId)
+                }
+            }
+            secondAction?.let {
+                RoundedIconButton(
+                    modifier = modifier.padding(start = 8.dp),
+                    icon = secondAction.first
+                ) {
+                    secondAction.second(clubId)
+                }
+            }
+        }
+
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun ClubToolbarPreview() {
+    PreviewContainer {
+        ProfileToolbar(
+            modifier = Modifier,
+            clubId = 1,
+            profilePicture = "",
+            name = "Los mejor de Dondo",
+            onBackPress = {},
+            firstAction = Pair(R.drawable.ic_share) {},
+            secondAction = Pair(R.drawable.ic_vertical_dot_menu) {}
         )
     }
 }
