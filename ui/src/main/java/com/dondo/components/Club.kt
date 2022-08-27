@@ -1,5 +1,7 @@
 package com.dondo.components
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +27,8 @@ import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dondo.components.ImageShape.Circle
+import com.dondo.components.ImageShape.Rounded
 import com.dondo.ui.R
 import com.dondo.ui.utils.theme.Gray2
 import com.dondo.ui.utils.theme.PreviewContainer
@@ -210,9 +214,10 @@ fun ProfileToolbar(
     clubId: Int,
     profilePicture: String,
     name: String,
+    @DrawableRes backIcon: Int,
     onBackPress: () -> Unit,
-    firstAction: Pair<Int, (Int) -> Unit>?,
-    secondAction: Pair<Int, (Int) -> Unit>?,
+    firstButton: Pair<Int, (Int) -> Unit>?,
+    secondButton: Pair<Int, (Int) -> Unit>?,
 ) {
     Row(
         modifier = modifier
@@ -229,7 +234,7 @@ fun ProfileToolbar(
                 onClick = { onBackPress() }
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_back),
+                    painter = painterResource(id = backIcon),
                     contentDescription = null,
                     tint = Gray2
                 )
@@ -248,22 +253,22 @@ fun ProfileToolbar(
             )
         }
         Row {
-            firstAction?.let {
+            firstButton?.let {
                 // first is the icon
                 // second is the onClick
-                RoundedIconButton(
+                CircleIconButton(
                     modifier = modifier,
-                    icon = firstAction.first
+                    icon = firstButton.first
                 ) {
-                    firstAction.second(clubId)
+                    firstButton.second(clubId)
                 }
             }
-            secondAction?.let {
-                RoundedIconButton(
+            secondButton?.let {
+                CircleIconButton(
                     modifier = modifier.padding(start = 8.dp),
-                    icon = secondAction.first
+                    icon = secondButton.first
                 ) {
-                    secondAction.second(clubId)
+                    secondButton.second(clubId)
                 }
             }
         }
@@ -280,9 +285,79 @@ private fun ClubToolbarPreview() {
             clubId = 1,
             profilePicture = "",
             name = "Los mejor de Dondo",
+            backIcon = R.drawable.ic_back,
             onBackPress = {},
-            firstAction = Pair(R.drawable.ic_share) {},
-            secondAction = Pair(R.drawable.ic_vertical_dot_menu) {}
+            firstButton = Pair(R.drawable.ic_share) {},
+            secondButton = Pair(R.drawable.ic_vertical_dot_menu) {}
         )
+    }
+}
+
+enum class ImageShape { Rounded, Circle }
+
+@Composable
+fun ClubImages(
+    modifier: Modifier,
+    imageShape: ImageShape,
+    shouldShowCount: Boolean,
+    formattedCount: String?,
+    pictures: List<String>,
+    onClick: () -> Unit
+) {
+    Column {
+        Row(
+            modifier = Modifier
+                .padding(end = 6.dp, bottom = 8.dp)
+                .clickable { onClick() }
+        ) {
+            when (imageShape) {
+                Rounded -> {
+                    pictures.forEach { itemPic ->
+                        RoundedCornerPicture(
+                            modifier
+                                .padding(end = 6.dp),
+                            profilePicture = itemPic
+                        )
+                    }
+                    if (shouldShowCount && !formattedCount.isNullOrBlank()) {
+                        RoundedText(
+                            modifier = modifier,
+                            text = formattedCount
+                        )
+                    }
+                }
+                Circle -> {
+                    pictures.forEach { itemPic ->
+                        CircleShapedPicture(
+                            modifier
+                                .padding(end = 6.dp),
+                            profilePicture = itemPic,
+                            size = 40.dp
+                        )
+                    }
+                    if (shouldShowCount && !formattedCount.isNullOrBlank()) {
+                        CircleText(
+                            modifier = modifier,
+                            text = formattedCount
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun ClubImagesPreview() {
+    PreviewContainer {
+        ClubImages(
+            modifier = Modifier,
+            imageShape = Circle,
+            shouldShowCount = true,
+            formattedCount = "+3,9M",
+            pictures = listOf("", "")
+        ) {
+        }
     }
 }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -17,17 +18,18 @@ import com.dondo.ui.utils.theme.PreviewContainer
 
 @Composable
 fun CircleShapedPicture(
+    modifier: Modifier = Modifier,
     profilePicture: String,
     size: Dp = 50.dp
 ) {
     AsyncImage(
-        modifier = Modifier
+        modifier = modifier
             .height(size)
             .width(size)
             .clip(CircleShape),
+        contentScale = ContentScale.Crop,
         model = ImageRequest.Builder(LocalContext.current)
             .data(profilePicture)
-            .crossfade(true)
             .build(),
         contentDescription = null
     )
@@ -35,13 +37,15 @@ fun CircleShapedPicture(
 
 @Composable
 fun RoundedCornerPicture(
+    modifier: Modifier = Modifier,
     profilePicture: String
 ) {
     AsyncImage(
-        modifier = Modifier
+        modifier = modifier
             .height(40.dp)
             .width(40.dp)
             .clip(RoundedCornerShape(10.dp)),
+        contentScale = ContentScale.Crop,
         model = ImageRequest.Builder(LocalContext.current)
             .data(profilePicture)
             .crossfade(true)
@@ -54,7 +58,7 @@ fun RoundedCornerPicture(
 @Composable
 private fun CircleShapedPicturePreview() {
     PreviewContainer {
-        CircleShapedPicture("https://picsum.photos/300/300")
+        CircleShapedPicture(profilePicture = "https://picsum.photos/300/300")
     }
 }
 
@@ -62,6 +66,6 @@ private fun CircleShapedPicturePreview() {
 @Composable
 private fun RoundedCornerPicturePreview() {
     PreviewContainer {
-        RoundedCornerPicture("https://picsum.photos/300/300")
+        RoundedCornerPicture(profilePicture = "https://picsum.photos/300/300")
     }
 }

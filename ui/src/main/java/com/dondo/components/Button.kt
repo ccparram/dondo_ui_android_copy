@@ -23,7 +23,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -32,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign.Companion.Center
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.dondo.components.ButtonType.Primary
 import com.dondo.components.ButtonType.Secondary
 import com.dondo.ui.R
@@ -257,8 +260,8 @@ private fun MenuButtonComplexPreview() {
 }
 
 @Composable
-fun RoundedIconButton(
-    modifier: Modifier,
+fun CircleIconButton(
+    modifier: Modifier = Modifier,
     @DrawableRes icon: Int,
     onClick: () -> Unit
 ) {
@@ -273,9 +276,9 @@ fun RoundedIconButton(
             ),
         onClick = { onClick() },
         shape = CircleShape,
-        border = BorderStroke(1.dp, Color.Black),
+        border = BorderStroke(1.dp, Black),
         contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Black)
     ) {
         Icon(painter = painterResource(id = icon), contentDescription = null)
     }
@@ -283,12 +286,94 @@ fun RoundedIconButton(
 
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
-private fun RoundedIconButtonPreview() {
+private fun CircleIconButtonPreview() {
     PreviewContainer {
-        RoundedIconButton(
-            modifier = Modifier,
+        CircleIconButton(
             icon = R.drawable.ic_share
         ) {
         }
+    }
+}
+
+@Composable
+fun CircleText(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    OutlinedButton(
+        modifier = modifier
+            .size(40.dp)
+            .volumeBorder(
+                offsetX = 3f,
+                offsetY = 10f,
+                sizeWidthToSubstract = 6f,
+                sizeHeightToSubstract = 6f
+            ),
+        onClick = {},
+        enabled = false,
+        shape = CircleShape,
+        border = BorderStroke(1.dp, Black),
+        contentPadding = PaddingValues(0.dp),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Black)
+    ) {
+        Text(
+            text = text,
+            fontSize = 10.sp,
+            color = Black,
+            maxLines = 1
+        )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun CircleTextButtonPreview() {
+    PreviewContainer {
+        CircleText(
+            text = "+2.9k"
+        )
+    }
+}
+
+@Composable
+fun RoundedText(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    OutlinedButton(
+        modifier = modifier
+            .size(40.dp)
+            .volumeBorder(
+                offsetX = 3f,
+                offsetY = 10f,
+                sizeWidthToSubstract = 6f,
+                sizeHeightToSubstract = 6f,
+                cornerRadiusX = 30f,
+                cornerRadiusY = 30f,
+            )
+            .clip(RoundedCornerShape(10.dp)),
+        shape = RoundedCornerShape(10.dp),
+        onClick = {},
+        enabled = false,
+        border = BorderStroke(1.dp, Black),
+        contentPadding = PaddingValues(0.dp),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Black)
+    ) {
+        Text(
+            text = text,
+            fontSize = 10.sp,
+            color = Black,
+            maxLines = 1
+        )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun RoundedTextButtonPreview() {
+    PreviewContainer {
+        RoundedText(
+            text = "+2.9k"
+        )
     }
 }

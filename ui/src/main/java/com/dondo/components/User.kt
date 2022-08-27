@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.BottomEnd
@@ -31,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dondo.components.ButtonType.Secondary
 import com.dondo.ui.R
+import com.dondo.ui.utils.Constants.EMPTY
 import com.dondo.ui.utils.theme.DondoThemeContainer
 import com.dondo.ui.utils.theme.Gray2
 import com.dondo.ui.utils.theme.PreviewContainer
@@ -147,7 +147,7 @@ fun MenuUserProfile(
     modifier: Modifier = Modifier,
     userId: Int,
     onClick: (Int) -> Unit,
-    profilePicture: String,
+    profilePicture: String?,
     isVerified: Boolean,
     username: String,
     reviewsSummary: String
@@ -168,12 +168,12 @@ fun MenuUserProfile(
                 modifier = modifier
                     .align(CenterVertically)
             ) {
-                CircleShapedPicture(profilePicture = profilePicture)
+                CircleShapedPicture(profilePicture = profilePicture ?: EMPTY)
                 if (isVerified) {
-                    Icon(
+                    Image(
                         modifier = modifier
-                            .width(9.dp)
-                            .height(9.dp)
+                            .width(16.dp)
+                            .height(16.dp)
                             .align(BottomEnd),
                         painter = painterResource(id = R.drawable.ic_verified),
                         contentDescription = null
