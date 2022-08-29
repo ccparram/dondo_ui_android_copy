@@ -146,7 +146,7 @@ class EditTextField @JvmOverloads constructor(
             val gd = GradientDrawable().apply {
                 setStroke(2, getColorCompat(R.color.red))
                 cornerRadius = dpToPx(10f).toFloat()
-                color = getColorStateListCompat(R.color.elevation_1)
+                color = getColorStateListCompat(android.R.color.white)
             }
 
             tvErrorLabel.text = errorMessage
