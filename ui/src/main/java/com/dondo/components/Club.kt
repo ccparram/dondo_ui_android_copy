@@ -216,8 +216,8 @@ fun ProfileToolbar(
     name: String,
     @DrawableRes backIcon: Int,
     onBackPress: () -> Unit,
-    firstButton: Pair<Int, (Int) -> Unit>?,
-    secondButton: Pair<Int, (Int) -> Unit>?,
+    firstButton: Pair<Int, (Int) -> Unit>? = null,
+    secondButton: Pair<Int, (Int) -> Unit>? = null,
 ) {
     Row(
         modifier = modifier
@@ -252,7 +252,10 @@ fun ProfileToolbar(
                 overflow = Ellipsis
             )
         }
-        Row {
+        Row(
+            modifier = modifier
+                .padding(end = 16.dp)
+        ) {
             firstButton?.let {
                 // first is the icon
                 // second is the onClick
