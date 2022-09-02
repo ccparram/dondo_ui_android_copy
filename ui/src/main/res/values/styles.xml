@@ -39,26 +39,26 @@
     </style>
 
     <style name="TextAppearance.Posting.Label" parent="TextAppearance.H3">
-        <item name="android:textColor">@color/darkG1</item>
+        <item name="android:textColor">@color/elevation_2</item>
     </style>
 
     <style name="MaterialEditTextField" parent="ThemeOverlay.Material3.AutoCompleteTextView.FilledBox">
         <item name="android:textColorHint">@color/text_mid_emphasis</item>
         <item name="android:textColorHighlight">@color/text_disabled</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/green</item>
+        <item name="android:textColor">@color/elevation_2</item>
         <item name="android:minHeight">@dimen/edittext_min_height</item>
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxBackgroundMode">filled</item>
         <item name="boxStrokeWidthFocused">0dp</item>
         <item name="errorEnabled">false</item>
-        <item name="hintTextColor">@color/text_disabled</item>
+        <item name="hintTextColor">@color/text_mid_emphasis</item>
     </style>
 
     <!--  This overrides the cursor handlers on text selected
       Reference Link: https://medium.com/omisoft/textinputlayout-styling-8b36a5e0d73c -->
     <style name="EditTextFieldThemeOverlay" parent="ThemeOverlay.AppCompat">
-        <item name="colorPrimary">@color/green</item>
-        <item name="colorAccent">@color/green</item>
+        <item name="colorPrimary">@color/elevation_2</item>
+        <item name="colorAccent">@color/elevation_2</item>
     </style>
 </resources>

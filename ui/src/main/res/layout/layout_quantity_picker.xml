@@ -35,6 +35,7 @@
             android:lines="1"
             android:maxHeight="@dimen/quantity_picker_max_height"
             android:maxLines="1"
+            android:textColor="@color/elevation_2"
             android:theme="@style/EditTextFieldThemeOverlay"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

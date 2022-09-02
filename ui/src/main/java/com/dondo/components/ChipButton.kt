@@ -22,8 +22,7 @@ fun ChipButton(
     onSelectionChanged: (String) -> Unit = {},
 ) {
     Surface(
-        modifier = modifier.padding(4.dp)
-            .darkBorder(shape = RoundedCornerShape(10.dp)),
+        modifier = modifier.darkBorder(shape = RoundedCornerShape(10.dp)),
         elevation = if (isSelected) 10.dp else 0.dp,
         shape = RoundedCornerShape(10.dp),
         color = chipStyleColor(isSelected)
@@ -40,7 +39,7 @@ fun ChipButton(
             Text(
                 text = "#$text",
                 style = DondoThemeContainer.typography.body1.copy(color = chipStyleTextColor(isSelected)),
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp)
             )
         }
     }

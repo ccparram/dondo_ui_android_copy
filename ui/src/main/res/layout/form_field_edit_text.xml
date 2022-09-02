@@ -15,7 +15,7 @@
         android:theme="@style/EditTextFieldThemeOverlay"
         app:hintTextColor="@color/text_disabled"
         app:placeholderTextAppearance="@style/TextAppearance.Body1"
-        app:placeholderTextColor="@color/text_mid_emphasis">
+        app:placeholderTextColor="@color/text_placeholder">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etContent"
