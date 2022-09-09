@@ -23,11 +23,14 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.dondo.components.ButtonType.Secondary
 import com.dondo.ui.R
 import com.dondo.ui.utils.Constants.EMPTY
@@ -62,6 +65,7 @@ fun UserElement(
                 Row {
                     Text(
                         modifier = modifier,
+                        fontWeight = FontWeight.Bold,
                         text = name,
                         maxLines = 1,
                         overflow = Ellipsis,
@@ -70,8 +74,8 @@ fun UserElement(
                         modifier = modifier
                             .padding(start = 8.dp),
                         text = reviewsSummary,
+                        style = TextStyle(fontSize = 14.sp, color = Color.Black),
                         maxLines = 1,
-                        color = Gray2
                     )
                 }
                 Text(
@@ -189,6 +193,7 @@ fun MenuUserProfile(
                 Row {
                     Text(
                         modifier = modifier,
+                        fontWeight = FontWeight.Bold,
                         text = username,
                         maxLines = 1,
                         overflow = Ellipsis,
@@ -198,7 +203,7 @@ fun MenuUserProfile(
                             .padding(start = 8.dp),
                         text = reviewsSummary,
                         maxLines = 1,
-                        color = Gray2
+                        style = TextStyle(fontSize = 14.sp, color = Color.Black),
                     )
                 }
                 Text(

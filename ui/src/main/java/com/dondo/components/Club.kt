@@ -216,8 +216,7 @@ fun ProfileToolbar(
     name: String,
     @DrawableRes backIcon: Int,
     onBackPress: () -> Unit,
-    firstButton: Pair<Int, (Int) -> Unit>? = null,
-    secondButton: Pair<Int, (Int) -> Unit>? = null,
+    rightButton: Pair<Int, (Int) -> Unit>? = null,
 ) {
     Row(
         modifier = modifier
@@ -243,35 +242,31 @@ fun ProfileToolbar(
                 profilePicture = profilePicture,
                 size = 40.dp
             )
-            Text(
-                modifier = modifier
-                    .padding(14.dp),
-                textAlign = TextAlign.Start,
-                text = name,
-                maxLines = 1,
-                overflow = Ellipsis
-            )
+            Row(
+                modifier = Modifier
+                .padding(14.dp),
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Text(
+                    modifier = modifier,
+                    textAlign = TextAlign.Start,
+                    color = Gray2,
+                    text = name,
+                    maxLines = 2,
+                    overflow = Ellipsis
+                )
+            }
         }
         Row(
             modifier = modifier
                 .padding(end = 16.dp)
         ) {
-            firstButton?.let {
-                // first is the icon
-                // second is the onClick
-                CircleIconButton(
-                    modifier = modifier,
-                    icon = firstButton.first
-                ) {
-                    firstButton.second(clubId)
-                }
-            }
-            secondButton?.let {
+            rightButton?.let {
                 CircleIconButton(
                     modifier = modifier.padding(start = 8.dp),
-                    icon = secondButton.first
+                    icon = rightButton.first
                 ) {
-                    secondButton.second(clubId)
+                    rightButton.second(clubId)
                 }
             }
         }
@@ -281,7 +276,7 @@ fun ProfileToolbar(
 
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
-private fun ClubToolbarPreview() {
+private fun ProfileToolbarPreview() {
     PreviewContainer {
         ProfileToolbar(
             modifier = Modifier,
@@ -290,8 +285,7 @@ private fun ClubToolbarPreview() {
             name = "Los mejor de Dondo",
             backIcon = R.drawable.ic_back,
             onBackPress = {},
-            firstButton = Pair(R.drawable.ic_share) {},
-            secondButton = Pair(R.drawable.ic_vertical_dot_menu) {}
+            rightButton = Pair(R.drawable.ic_vertical_dot_menu) {}
         )
     }
 }

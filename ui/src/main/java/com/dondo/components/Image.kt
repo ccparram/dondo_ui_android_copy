@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.dondo.ui.R
 import com.dondo.ui.utils.theme.PreviewContainer
 
 @Composable
@@ -30,6 +31,7 @@ fun CircleShapedPicture(
         contentScale = ContentScale.Crop,
         model = ImageRequest.Builder(LocalContext.current)
             .data(profilePicture)
+            .error(R.drawable.placeholder_profile_picture)
             .build(),
         contentDescription = null
     )
