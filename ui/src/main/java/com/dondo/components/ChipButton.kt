@@ -17,9 +17,10 @@ import com.dondo.ui.utils.theme.darkBorder
 @Composable
 fun ChipButton(
     modifier: Modifier = Modifier,
+    id: Int,
     text: String,
     isSelected: Boolean = false,
-    onSelectionChanged: (String) -> Unit = {},
+    onSelectionChanged: (Int) -> Unit = {},
 ) {
     Surface(
         modifier = modifier.darkBorder(shape = RoundedCornerShape(10.dp)),
@@ -32,7 +33,7 @@ fun ChipButton(
                 .toggleable(
                     value = isSelected,
                     onValueChange = {
-                        onSelectionChanged(text)
+                        onSelectionChanged(id)
                     }
                 )
         ) {
@@ -64,7 +65,7 @@ private fun chipStyleTextColor(isSelected: Boolean) = if (isSelected) {
 @Composable
 private fun ChipButtonPreview() {
     PreviewContainer {
-        ChipButton(text = "Fotografía") {
+        ChipButton(id = 1, text = "Fotografía") {
         }
     }
 }
@@ -73,7 +74,7 @@ private fun ChipButtonPreview() {
 @Composable
 private fun ChipButtonSelectedPreview() {
     PreviewContainer {
-        ChipButton(text = "Fotografía", isSelected = true) {
+        ChipButton(id = 1, text = "Fotografía", isSelected = true) {
         }
     }
 }
