@@ -44,12 +44,35 @@ fun Modifier.darkBorder(width: Dp = 1.dp, shape: CornerBasedShape = Shapes.large
         color = color
     )
 
-fun Modifier.volumeBorder(): Modifier =
-    drawBehind {
-        drawRoundRect(
-            color = Gray3,
-            cornerRadius = CornerRadius(60f, 60f),
-            topLeft = Offset(15f, 20f),
-            size = Size(size.width - 4f, size.height - 10f),
-        )
-    }.padding(bottom = 1.dp, end = 2.dp)
+fun Modifier.volumeBorder(
+    offsetX: Float = 15f,
+    offsetY: Float = 20f,
+    sizeWidthToSubstract: Float = 4f,
+    sizeHeightToSubstract: Float = 10f,
+    cornerRadiusX: Float = 60f,
+    cornerRadiusY: Float = 60f
+): Modifier = drawBehind {
+    drawRoundRect(
+        color = Gray3,
+        cornerRadius = CornerRadius(cornerRadiusX, cornerRadiusY),
+        topLeft = Offset(offsetX, offsetY),
+        size = Size(size.width - sizeWidthToSubstract, size.height - sizeHeightToSubstract),
+    )
+}.padding(bottom = 1.dp, end = 2.dp)
+
+fun Modifier.fadedShadow(
+    offsetX: Float = 15f,
+    offsetY: Float = 20f,
+    sizeWidthToSubstract: Float = 4f,
+    sizeHeightToSubstract: Float = 10f,
+    cornerRadiusX: Float = 60f,
+    cornerRadiusY: Float = 60f
+): Modifier = drawBehind {
+    drawRoundRect(
+        color = Gray2,
+        cornerRadius = CornerRadius(cornerRadiusX, cornerRadiusY),
+        topLeft = Offset(offsetX, offsetY),
+        alpha = 0.4f,
+        size = Size(size.width - sizeWidthToSubstract, size.height - sizeHeightToSubstract),
+    )
+}.padding(bottom = 1.dp, end = 2.dp)

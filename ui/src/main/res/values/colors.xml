@@ -23,7 +23,7 @@
     <color name="main_primary">@android:color/white</color>
     <color name="main_primary_disabled">#E7E7E7</color>
 
-    <!--Edit Text Field-->
+    <!-- Edit Text Field -->
     <color name="text_field_disable">#3A3A3A</color>
 
     <!--  Text -->
@@ -40,7 +40,7 @@
     <color name="button_bg_primary_enabled">@color/elevation_2</color>
     <color name="button_bg_primary_disabled">@color/main_primary_disabled</color>
 
-    <!--  Quantity picker  -->
+    <!-- Quantity picker -->
     <color name="quantity_picker_action_disabled">@color/main_primary_disabled</color>
     <color name="quantity_picker_action_enable">@color/elevation_2</color>
 </resources>
