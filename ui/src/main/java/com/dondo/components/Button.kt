@@ -41,6 +41,7 @@ import com.dondo.ui.R
 import com.dondo.ui.utils.theme.DondoThemeContainer
 import com.dondo.ui.utils.theme.PreviewContainer
 import com.dondo.ui.utils.theme.conditional
+import com.dondo.ui.utils.theme.fadedShadow
 import com.dondo.ui.utils.theme.volumeBorder
 
 @Composable
@@ -58,6 +59,7 @@ fun DondoButton(
             .conditional(
                 condition = enabled && buttonType == Secondary,
                 ifTrue = { volumeBorder() },
+                ifFalse = { fadedShadow() }
             ),
         onClick = onClick,
         colors = buttonColors(buttonType),
@@ -135,8 +137,7 @@ enum class ButtonType { Primary, Secondary }
 @Composable
 private fun PrimaryButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Primary button") {
-        }
+        DondoButton(text = "Primary button") {}
     }
 }
 
@@ -144,7 +145,18 @@ private fun PrimaryButtonPreview() {
 @Composable
 private fun SecondaryButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Secondary button", buttonType = Secondary) { }
+        DondoButton(text = "Secondary button", buttonType = Secondary) {}
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun PrimaryButtonWithFadedShadowPreview() {
+    PreviewContainer {
+        DondoButton(
+            modifier = Modifier.fadedShadow(),
+            text = "Primary button", buttonType = Primary
+        ) {}
     }
 }
 
@@ -152,7 +164,7 @@ private fun SecondaryButtonPreview() {
 @Composable
 private fun DisabledButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Disabled button", enabled = false) { }
+        DondoButton(text = "Disabled button", enabled = false) {}
     }
 }
 
@@ -183,8 +195,7 @@ fun MenuButton(
         border = borderStroke(buttonType = Secondary, enabled = enabled)
     ) {
         Row(
-            modifier = modifier
-                .fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -198,8 +209,7 @@ fun MenuButton(
                 )
                 if (!count.isNullOrBlank()) {
                     Text(
-                        modifier = modifier
-                            .padding(start = 4.dp),
+                        modifier = modifier.padding(start = 4.dp),
                         textAlign = TextAlign.Start,
                         color = Color(0xFF7D7D7D),
                         text = "($count)"
@@ -211,8 +221,7 @@ fun MenuButton(
             ) {
                 if (!notificationBadgeText.isNullOrBlank()) {
                     Badge(
-                        modifier = modifier
-                            .padding(end = 12.dp),
+                        modifier = modifier.padding(end = 12.dp),
                     ) {
                         Text(
                             maxLines = 1,
