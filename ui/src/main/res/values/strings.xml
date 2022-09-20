@@ -9,4 +9,6 @@
     <string name="follow">Follow</string>
     <string name="following">Following</string>
     <string name="join">Join</string>
+
+    <string name="see_my_profile">See my profile</string>
 </resources>

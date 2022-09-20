@@ -1,26 +1,31 @@
 package com.dondo.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.interaction.Interaction
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Badge
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -29,15 +34,15 @@ import androidx.compose.ui.text.style.TextAlign.Companion.Center
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.dondo.components.ButtonType.Primary
 import com.dondo.components.ButtonType.Secondary
 import com.dondo.ui.R
 import com.dondo.ui.utils.theme.DondoThemeContainer
 import com.dondo.ui.utils.theme.PreviewContainer
 import com.dondo.ui.utils.theme.conditional
+import com.dondo.ui.utils.theme.fadedShadow
 import com.dondo.ui.utils.theme.volumeBorder
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun DondoButton(
@@ -54,6 +59,7 @@ fun DondoButton(
             .conditional(
                 condition = enabled && buttonType == Secondary,
                 ifTrue = { volumeBorder() },
+                ifFalse = { fadedShadow() }
             ),
         onClick = onClick,
         colors = buttonColors(buttonType),
@@ -61,7 +67,6 @@ fun DondoButton(
         shape = RoundedCornerShape(24.dp),
         elevation = buttonElevation(buttonType),
         border = borderStroke(buttonType, enabled),
-        interactionSource = remember { MutableInteractionSource() },
     ) {
         ButtonContent(text, buttonType, enabled)
     }
@@ -132,8 +137,7 @@ enum class ButtonType { Primary, Secondary }
 @Composable
 private fun PrimaryButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Primary button") {
-        }
+        DondoButton(text = "Primary button") {}
     }
 }
 
@@ -141,7 +145,18 @@ private fun PrimaryButtonPreview() {
 @Composable
 private fun SecondaryButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Secondary button", buttonType = Secondary) { }
+        DondoButton(text = "Secondary button", buttonType = Secondary) {}
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun PrimaryButtonWithFadedShadowPreview() {
+    PreviewContainer {
+        DondoButton(
+            modifier = Modifier.fadedShadow(),
+            text = "Primary button", buttonType = Primary
+        ) {}
     }
 }
 
@@ -149,7 +164,7 @@ private fun SecondaryButtonPreview() {
 @Composable
 private fun DisabledButtonPreview() {
     PreviewContainer {
-        DondoButton(text = "Disabled button", enabled = false) { }
+        DondoButton(text = "Disabled button", enabled = false) {}
     }
 }
 
@@ -165,7 +180,13 @@ fun MenuButton(
     Button(
         modifier = modifier
             .height(60.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .volumeBorder(
+                offsetX = 5f,
+                offsetY = 15f,
+                cornerRadiusX = 30f,
+                cornerRadiusY = 30f
+            ),
         onClick = onClick,
         colors = buttonColors(buttonType = Secondary),
         enabled = enabled,
@@ -247,13 +268,121 @@ private fun MenuButtonComplexPreview() {
     }
 }
 
-// Used to remove ripple effect on Button when is ButtonType.Borderless
-// Reference: https://semicolonspace.com/jetpack-compose-disable-ripple-effect/
-class NoRippleInteractionSource : MutableInteractionSource {
+@Composable
+fun CircleIconButton(
+    modifier: Modifier = Modifier,
+    @DrawableRes icon: Int,
+    onClick: () -> Unit
+) {
+    OutlinedButton(
+        modifier = modifier
+            .size(40.dp)
+            .volumeBorder(
+                offsetX = 3f,
+                offsetY = 10f,
+                sizeWidthToSubstract = 6f,
+                sizeHeightToSubstract = 6f
+            ),
+        onClick = { onClick() },
+        shape = CircleShape,
+        border = BorderStroke(1.dp, Black),
+        contentPadding = PaddingValues(0.dp),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Black)
+    ) {
+        Icon(painter = painterResource(id = icon), contentDescription = null)
+    }
+}
 
-    override val interactions: Flow<Interaction> = emptyFlow()
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun CircleIconButtonPreview() {
+    PreviewContainer {
+        CircleIconButton(
+            icon = R.drawable.ic_share
+        ) {
+        }
+    }
+}
 
-    override suspend fun emit(interaction: Interaction) {}
+@Composable
+fun CircleText(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    OutlinedButton(
+        modifier = modifier
+            .size(40.dp)
+            .volumeBorder(
+                offsetX = 3f,
+                offsetY = 10f,
+                sizeWidthToSubstract = 6f,
+                sizeHeightToSubstract = 6f
+            ),
+        onClick = {},
+        enabled = false,
+        shape = CircleShape,
+        border = BorderStroke(1.dp, Black),
+        contentPadding = PaddingValues(0.dp),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Black)
+    ) {
+        Text(
+            text = text,
+            fontSize = 10.sp,
+            color = Black,
+            maxLines = 1
+        )
+    }
+}
 
-    override fun tryEmit(interaction: Interaction) = true
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun CircleTextButtonPreview() {
+    PreviewContainer {
+        CircleText(
+            text = "+2.9k"
+        )
+    }
+}
+
+@Composable
+fun RoundedText(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    OutlinedButton(
+        modifier = modifier
+            .size(40.dp)
+            .volumeBorder(
+                offsetX = 3f,
+                offsetY = 10f,
+                sizeWidthToSubstract = 6f,
+                sizeHeightToSubstract = 6f,
+                cornerRadiusX = 30f,
+                cornerRadiusY = 30f,
+            )
+            .clip(RoundedCornerShape(10.dp)),
+        shape = RoundedCornerShape(10.dp),
+        onClick = {},
+        enabled = false,
+        border = BorderStroke(1.dp, Black),
+        contentPadding = PaddingValues(0.dp),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Black)
+    ) {
+        Text(
+            text = text,
+            fontSize = 10.sp,
+            color = Black,
+            maxLines = 1
+        )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
+private fun RoundedTextButtonPreview() {
+    PreviewContainer {
+        RoundedText(
+            text = "+2.9k"
+        )
+    }
 }
