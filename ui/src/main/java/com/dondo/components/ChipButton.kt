@@ -17,13 +17,13 @@ import com.dondo.ui.utils.theme.darkBorder
 @Composable
 fun ChipButton(
     modifier: Modifier = Modifier,
+    id: Int,
     text: String,
     isSelected: Boolean = false,
-    onSelectionChanged: (String) -> Unit = {},
+    onSelectionChanged: (Int) -> Unit = {},
 ) {
     Surface(
-        modifier = modifier.padding(4.dp)
-            .darkBorder(shape = RoundedCornerShape(10.dp)),
+        modifier = modifier.darkBorder(shape = RoundedCornerShape(10.dp)),
         elevation = if (isSelected) 10.dp else 0.dp,
         shape = RoundedCornerShape(10.dp),
         color = chipStyleColor(isSelected)
@@ -33,14 +33,14 @@ fun ChipButton(
                 .toggleable(
                     value = isSelected,
                     onValueChange = {
-                        onSelectionChanged(text)
+                        onSelectionChanged(id)
                     }
                 )
         ) {
             Text(
                 text = "#$text",
-                style = DondoThemeContainer.typography.body1.copy(color = chipStyleTextColor(isSelected)),
-                modifier = Modifier.padding(8.dp),
+                style = DondoThemeContainer.typography.h4.copy(color = chipStyleTextColor(isSelected)),
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
                 maxLines = 1
             )
         }
@@ -66,7 +66,7 @@ private fun chipStyleTextColor(isSelected: Boolean) = if (isSelected) {
 @Composable
 private fun ChipButtonPreview() {
     PreviewContainer {
-        ChipButton(text = "Fotografía") {
+        ChipButton(id = 1, text = "Fotografía") {
         }
     }
 }
@@ -75,7 +75,7 @@ private fun ChipButtonPreview() {
 @Composable
 private fun ChipButtonSelectedPreview() {
     PreviewContainer {
-        ChipButton(text = "Fotografía", isSelected = true) {
+        ChipButton(id = 1, text = "Fotografía", isSelected = true) {
         }
     }
 }

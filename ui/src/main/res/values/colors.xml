@@ -7,7 +7,7 @@
     <color name="transparentWhite">#33FFFFFF</color>
     <color name="transparent_clear">#00000000</color>
     <color name="green">#77F16D</color>
-    <color name="red">#CA4047</color>
+    <color name="red">#FA4D56</color>
     <color name="greyPale">#E7E5EC</color>
 
     <color name="darkG1">#E7E5EC</color>
@@ -20,26 +20,27 @@
     <color name="elevation_4">#323232</color>
     <color name="elevation_5">#545454</color>
 
-    <color name="main_primary">#77F16D</color>
+    <color name="main_primary">@android:color/white</color>
+    <color name="main_primary_disabled">#E7E7E7</color>
 
     <!-- Edit Text Field -->
     <color name="text_field_disable">#3A3A3A</color>
 
     <!--  Text -->
     <color name="text_high_emphasis">#E7E7E7</color>
+    <color name="text_placeholder">#7D7D7D</color>
     <color name="text_mid_emphasis">#9D9D9D</color>
-    <color name="text_disabled">#686868</color>
-    <color name="text_link">@color/main_primary</color>
-    <color name="text_error">#CA4047</color>
-    <color name="text_button_primary_enabled">@color/elevation_background</color>
-    <color name="text_button_secondary_enabled">@color/main_primary</color>
+    <color name="text_disabled">#7D7D7D</color>
+    <color name="text_error">#FA4D56</color>
+    <color name="text_button_primary_enabled">@color/main_primary</color>
+    <color name="text_button_secondary_enabled">@color/elevation_2</color>
     <color name="text_button_disabled">@color/text_disabled</color>
 
     <!-- Button -->
-    <color name="button_bg_primary_enabled">@color/main_primary</color>
-    <color name="button_bg_primary_disabled">@color/elevation_1</color>
+    <color name="button_bg_primary_enabled">@color/elevation_2</color>
+    <color name="button_bg_primary_disabled">@color/main_primary_disabled</color>
 
     <!-- Quantity picker -->
-    <color name="quantity_picker_action_disabled">@color/text_disabled</color>
-    <color name="quantity_picker_action_enable">@color/greyPale</color>
+    <color name="quantity_picker_action_disabled">@color/main_primary_disabled</color>
+    <color name="quantity_picker_action_enable">@color/elevation_2</color>
 </resources>
