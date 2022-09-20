@@ -39,8 +39,9 @@ fun ChipButton(
         ) {
             Text(
                 text = "#$text",
-                style = DondoThemeContainer.typography.body1.copy(color = chipStyleTextColor(isSelected)),
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp)
+                style = DondoThemeContainer.typography.h4.copy(color = chipStyleTextColor(isSelected)),
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+                maxLines = 1
             )
         }
     }
