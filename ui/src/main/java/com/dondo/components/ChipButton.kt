@@ -20,7 +20,8 @@ fun ChipButton(
     id: Int,
     text: String,
     isSelected: Boolean = false,
-    onSelectionChanged: (Int) -> Unit = {},
+    prefix: String = "#",
+    onSelectionChanged: (Int) -> Unit = {}
 ) {
     Surface(
         modifier = modifier.darkBorder(shape = RoundedCornerShape(10.dp)),
@@ -38,7 +39,7 @@ fun ChipButton(
                 )
         ) {
             Text(
-                text = "#$text",
+                text = "$prefix$text",
                 style = DondoThemeContainer.typography.h4.copy(color = chipStyleTextColor(isSelected)),
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
                 maxLines = 1
