@@ -244,7 +244,7 @@ fun ProfileToolbar(
             )
             Row(
                 modifier = Modifier
-                .padding(14.dp),
+                    .padding(14.dp),
                 horizontalArrangement = Arrangement.Start
             ) {
                 Text(
@@ -311,8 +311,7 @@ fun ClubImages(
                 Rounded -> {
                     pictures.forEach { itemPic ->
                         RoundedCornerPicture(
-                            modifier
-                                .padding(end = 6.dp),
+                            modifier.padding(end = 6.dp),
                             profilePicture = itemPic
                         )
                     }
@@ -326,8 +325,7 @@ fun ClubImages(
                 Circle -> {
                     pictures.forEach { itemPic ->
                         CircleShapedPicture(
-                            modifier
-                                .padding(end = 6.dp),
+                            modifier.padding(end = 6.dp),
                             profilePicture = itemPic,
                             size = 40.dp
                         )
@@ -336,7 +334,7 @@ fun ClubImages(
                         CircleText(
                             modifier = modifier,
                             text = formattedCount
-                        )
+                        ) { onClick() }
                     }
                 }
             }
@@ -354,7 +352,6 @@ private fun ClubImagesPreview() {
             shouldShowCount = true,
             formattedCount = "+3,9M",
             pictures = listOf("", "")
-        ) {
-        }
+        ) {}
     }
 }

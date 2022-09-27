@@ -307,7 +307,8 @@ private fun CircleIconButtonPreview() {
 @Composable
 fun CircleText(
     modifier: Modifier = Modifier,
-    text: String
+    text: String,
+    onClick: () -> Unit
 ) {
     OutlinedButton(
         modifier = modifier
@@ -318,12 +319,12 @@ fun CircleText(
                 sizeWidthToSubstract = 6f,
                 sizeHeightToSubstract = 6f
             ),
-        onClick = {},
+        onClick = { onClick() },
         enabled = false,
         shape = CircleShape,
         border = BorderStroke(1.dp, Black),
         contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.outlinedButtonColors(contentColor = Black)
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = Black),
     ) {
         Text(
             text = text,
@@ -340,14 +341,15 @@ private fun CircleTextButtonPreview() {
     PreviewContainer {
         CircleText(
             text = "+2.9k"
-        )
+        ) {}
     }
 }
 
 @Composable
 fun RoundedText(
     modifier: Modifier = Modifier,
-    text: String
+    text: String,
+    onClick: () -> Unit
 ) {
     OutlinedButton(
         modifier = modifier
@@ -362,7 +364,7 @@ fun RoundedText(
             )
             .clip(RoundedCornerShape(10.dp)),
         shape = RoundedCornerShape(10.dp),
-        onClick = {},
+        onClick = { onClick() },
         enabled = false,
         border = BorderStroke(1.dp, Black),
         contentPadding = PaddingValues(0.dp),
@@ -383,6 +385,6 @@ private fun RoundedTextButtonPreview() {
     PreviewContainer {
         RoundedText(
             text = "+2.9k"
-        )
+        ) {}
     }
 }
