@@ -311,8 +311,7 @@ fun ClubImages(
                 Rounded -> {
                     pictures.forEach { itemPic ->
                         RoundedCornerPicture(
-                            modifier
-                                .padding(end = 6.dp),
+                            modifier.padding(end = 6.dp),
                             profilePicture = itemPic
                         )
                     }
