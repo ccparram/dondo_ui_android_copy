@@ -319,7 +319,7 @@ fun ClubImages(
                         RoundedText(
                             modifier = modifier,
                             text = formattedCount
-                        )
+                        ) {}
                     }
                 }
                 Circle -> {
