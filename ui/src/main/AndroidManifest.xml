@@ -1,1 +1,4 @@
-<manifest package="com.dondo.ui" />
+<manifest package="com.dondo.ui"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>
