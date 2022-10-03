@@ -20,7 +20,7 @@ import com.dondo.ui.utils.theme.PreviewContainer
 @Composable
 fun CircleShapedPicture(
     modifier: Modifier = Modifier,
-    profilePicture: String,
+    profilePicture: String?,
     size: Dp = 50.dp
 ) {
     AsyncImage(
