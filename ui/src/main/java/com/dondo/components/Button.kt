@@ -56,7 +56,7 @@ fun DondoButton(
 ) {
     Button(
         modifier = modifier
-            .wrapContentWidth()
+            .fillMaxWidth()
             .height(40.dp)
             .conditional(
                 condition = enabled && buttonType == Secondary,
