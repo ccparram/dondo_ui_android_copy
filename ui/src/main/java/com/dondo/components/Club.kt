@@ -224,50 +224,36 @@ fun ProfileToolbar(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = CenterVertically
     ) {
-        Row(
-            modifier = modifier
-                .wrapContentWidth(),
-            verticalAlignment = CenterVertically
+
+        IconButton(
+            onClick = { onBackPress() }
         ) {
-            IconButton(
-                onClick = { onBackPress() }
-            ) {
-                Icon(
-                    painter = painterResource(id = backIcon),
-                    contentDescription = null,
-                    tint = Gray2
-                )
-            }
-            CircleShapedPicture(
-                profilePicture = profilePicture,
-                size = 40.dp
+            Icon(
+                painter = painterResource(id = backIcon),
+                contentDescription = null,
+                tint = Gray2
             )
-            Row(
-                modifier = Modifier
-                    .padding(14.dp),
-                horizontalArrangement = Arrangement.Start
-            ) {
-                Text(
-                    modifier = modifier,
-                    textAlign = TextAlign.Start,
-                    color = Gray2,
-                    text = name,
-                    maxLines = 2,
-                    overflow = Ellipsis
-                )
-            }
         }
-        Row(
-            modifier = modifier
-                .padding(end = 16.dp)
-        ) {
-            rightButton?.let {
-                CircleIconButton(
-                    modifier = modifier.padding(start = 8.dp),
-                    icon = rightButton.first
-                ) {
-                    rightButton.second(clubId)
-                }
+        CircleShapedPicture(
+            profilePicture = profilePicture,
+            size = 40.dp
+        )
+        Text(
+            modifier = modifier.padding(start = 14.dp).weight(1F),
+            textAlign = TextAlign.Start,
+            color = Gray2,
+            text = name,
+            maxLines = 2,
+            overflow = Ellipsis
+        )
+        rightButton?.let {
+            CircleIconButton(
+                modifier = modifier
+                    .width(48.dp)
+                    .padding(start = 8.dp),
+                icon = rightButton.first
+            ) {
+                rightButton.second(clubId)
             }
         }
     }
@@ -281,7 +267,7 @@ private fun ProfileToolbarPreview() {
             modifier = Modifier,
             clubId = 1,
             profilePicture = "",
-            name = "Los mejor de Dondo",
+            name = "Los mejores de Dondo, texto largo, gracias.",
             backIcon = R.drawable.ic_back,
             onBackPress = {},
             rightButton = Pair(R.drawable.ic_vertical_dot_menu) {}

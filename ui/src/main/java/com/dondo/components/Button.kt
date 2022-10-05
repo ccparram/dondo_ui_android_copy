@@ -246,6 +246,22 @@ fun MenuButton(
 
 @Preview(showBackground = true, backgroundColor = 0xFCFBF0)
 @Composable
+private fun ProfileToolbarPreview() {
+    PreviewContainer {
+        ProfileToolbar(
+            modifier = Modifier,
+            clubId = 1,
+            profilePicture = "",
+            name = "Los mejor de Dondo con un texto más largo",
+            backIcon = R.drawable.ic_back,
+            onBackPress = {},
+            rightButton = Pair(R.drawable.ic_vertical_dot_menu) {}
+        )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFCFBF0)
+@Composable
 private fun MenuButtonSimplePreview() {
     PreviewContainer {
         MenuButton(
