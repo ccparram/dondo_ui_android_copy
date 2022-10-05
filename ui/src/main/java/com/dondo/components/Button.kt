@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Badge
@@ -31,6 +32,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextAlign.Companion.Center
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -54,7 +56,7 @@ fun DondoButton(
 ) {
     Button(
         modifier = modifier
-            .fillMaxWidth()
+            .wrapContentWidth()
             .height(40.dp)
             .conditional(
                 condition = enabled && buttonType == Secondary,
@@ -92,7 +94,7 @@ private fun ButtonContent(
         text = text,
         color = styleTextColor(buttonType, enabled),
         style = DondoThemeContainer.typography.button,
-        overflow = Ellipsis,
+        overflow = TextOverflow.Visible,
         maxLines = 1,
         textAlign = Center,
     )

@@ -70,7 +70,7 @@ fun ClubElement(
         Column(
             modifier = modifier
                 .padding(start = 16.dp)
-                .align(CenterVertically),
+                .weight(3F),
             horizontalAlignment = Start
         ) {
             Text(
@@ -88,11 +88,11 @@ fun ClubElement(
                 itemsCount = itemsCount
             )
         }
-        if (amIMember) {
+        if (!amIMember) {
             DondoButton(
                 modifier = modifier
-                    .padding(start = 16.dp)
-                    .align(CenterVertically),
+                    .align(CenterVertically)
+                    .weight(1F),
                 text = stringResource(id = R.string.join),
                 buttonType = ButtonType.Primary
             ) {
@@ -270,7 +270,6 @@ fun ProfileToolbar(
                 }
             }
         }
-
     }
 }
 
