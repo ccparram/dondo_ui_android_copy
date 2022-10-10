@@ -45,9 +45,9 @@ fun Modifier.darkBorder(width: Dp = 1.dp, shape: CornerBasedShape = Shapes.large
     )
 
 fun Modifier.volumeBorder(
-    offsetX: Float = 15f,
-    offsetY: Float = 20f,
-    sizeWidthToSubstract: Float = 4f,
+    offsetX: Float = 10f,
+    offsetY: Float = 12f,
+    sizeWidthToSubstract: Float = 12f,
     sizeHeightToSubstract: Float = 10f,
     cornerRadiusX: Float = 60f,
     cornerRadiusY: Float = 60f
@@ -61,10 +61,10 @@ fun Modifier.volumeBorder(
 }.padding(bottom = 1.dp, end = 2.dp)
 
 fun Modifier.fadedShadow(
-    offsetX: Float = 15f,
-    offsetY: Float = 20f,
-    sizeWidthToSubstract: Float = 4f,
-    sizeHeightToSubstract: Float = 10f,
+    offsetX: Float = 10f,
+    offsetY: Float = 12f,
+    sizeWidthToSubstract: Float = 12f,
+    sizeHeightToSubstract: Float = 8f,
     cornerRadiusX: Float = 60f,
     cornerRadiusY: Float = 60f
 ): Modifier = drawBehind {
