@@ -2,11 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: "kotlin-android"
 
 android {
-    compileSdkVersion 32
+    namespace "com.dondo.demo"
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.dondo.ui"
         minSdkVersion 23
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
     }
@@ -19,7 +20,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion '1.3.0'
+        kotlinCompilerExtensionVersion '1.3.2'
     }
 
     buildFeatures {
@@ -34,14 +35,14 @@ dependencies {
 
     //Android support
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
 
     //UI
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.7.0'
 
     //Compose
-    implementation 'androidx.activity:activity-compose:1.5.1'
-    implementation 'androidx.compose.material:material:1.2.1'
+    implementation 'androidx.activity:activity-compose:1.6.0'
+    implementation 'androidx.compose.material:material:1.3.0'
     implementation 'androidx.compose.animation:animation:1.2.1'
     implementation 'androidx.compose.ui:ui-tooling:1.2.1'
 }

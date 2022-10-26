@@ -8,11 +8,12 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    namespace = "com.dondo.ui"
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 23
-        targetSdk = 32
+        targetSdk = 33
     }
 
     buildTypes {
@@ -23,7 +24,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.0"
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
 
     buildFeatures {
@@ -36,26 +37,26 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     // Android support
-    implementation("androidx.appcompat:appcompat:1.5.0")
-    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.appcompat:appcompat:1.5.1")
+    implementation("androidx.core:core-ktx:1.9.0")
 
     // UI
-    implementation("com.google.android.material:material:1.6.1")
+    implementation("com.google.android.material:material:1.7.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("com.google.android.exoplayer:exoplayer:2.18.1")
-    implementation("io.coil-kt:coil:2.2.0")
+    implementation("io.coil-kt:coil:2.2.2")
 
     //Compose
-    implementation("androidx.activity:activity-compose:1.5.1")
-    implementation("androidx.compose.material:material:1.2.1")
+    implementation("androidx.activity:activity-compose:1.6.0")
+    implementation("androidx.compose.material:material:1.3.0")
     implementation("androidx.compose.animation:animation:1.2.1")
-    implementation("io.coil-kt:coil-compose:2.2.0")
+    implementation("io.coil-kt:coil-compose:2.2.2")
     implementation("androidx.compose.ui:ui-tooling:1.2.1")
 
     // UI Tests
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.2.1")
-    implementation("com.google.accompanist:accompanist-appcompat-theme:0.25.1")
+    implementation("com.google.accompanist:accompanist-appcompat-theme:0.27.0")
 
     // Development
     api("com.orhanobut:logger:2.2.0")
@@ -71,7 +72,7 @@ publishing {
             run {
                 groupId = "com.crowdswap"
                 artifactId = "dondo_ui_android"
-                version = "1.1.10"
+                version = "1.1.11"
             }
         }
     }
