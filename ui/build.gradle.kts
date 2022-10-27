@@ -1,10 +1,6 @@
-import java.io.FileInputStream
-import java.util.*
-
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("maven-publish")
 }
 
 android {
@@ -60,30 +56,4 @@ dependencies {
     // Development
     api("com.orhanobut:logger:2.2.0")
     api("com.github.ccparram:timber:4.8")
-}
-
-val githubProperties = Properties()
-githubProperties.load(FileInputStream(rootProject.file("github.properties")))
-
-publishing {
-    publications {
-        create<MavenPublication>("gpr") {
-            run {
-                groupId = "com.crowdswap"
-                artifactId = "dondo_ui_android"
-                version = "1.1.10"
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/dondoapp/dondo_ui_android")
-            credentials {
-                username = githubProperties["gpr.usr"] as String
-                password = githubProperties["gpr.key"] as String
-            }
-        }
-    }
 }
